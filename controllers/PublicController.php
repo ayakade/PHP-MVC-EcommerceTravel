@@ -13,7 +13,11 @@ Class PublicController extends Controller{
         $this->loadView("views/heroTop.php", 1, "heroHTML");
 
         // put contents into contentHTML (inside container)
+        $this->loadData(Cities::getRandCities(), "oCities"); // this now gives me a $this->oCities
         $this->loadView("views/city-recommend.php", 1, "contentHTML"); 
+
+        $this->loadData(Types::getAllType(), "oTypes"); // this now gives me a $this->oTypes
+        $this->loadView("views/accomodation-type.php", 1, "contentHTML"); 
 
         $this->loadView("views/hero-layout.php", 1, "content"); // save the results of this view, into $this->content
 
