@@ -10,8 +10,7 @@
     <div class="wrapper col-12 col-lg-12">
         <!-- show whatever HTML we generated and appended to $this->content and put it on the page right here -->
         <?=$this->content?> 
-    </div>
-
+    </div><!-- .wrapper -->
 	<script src="https://kit.fontawesome.com/76c00b2855.js" crossorigin="anonymous"></script>
 </body>
 </html>
