@@ -30,6 +30,25 @@ Class UserCOntroller extends Controller {
 		}
 	}
 
+	// signup page
+	public function signup() 
+	{
+		$this->loadRoute("Global", "header", "headerHTML"); // load header
+		$this->loadRoute("Global", "footer", "footerHTML"); // load footer
+		
+		$this->loadView("views/signup.php", 1, "contentHTML"); 
+
+        $this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main.php"); // final view
+	}
+
+	// new user sign up
+	public function doSignup()
+	{
+		
+	}
+
 	// user main page after login 
 	public function userMain() 
 	{
