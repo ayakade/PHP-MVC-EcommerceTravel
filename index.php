@@ -7,6 +7,8 @@ include("models/Cities.php");
 
 include("models/Types.php");
 
+include("models/Users.php");
+
 include("libs/DB.php");
 include("libs/Errors.php");
 
