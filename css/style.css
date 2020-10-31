@@ -6,7 +6,7 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	color: #044b6b;
+    color: #044b6b;
 }
 
 a {
@@ -44,6 +44,18 @@ p {
 
 .row:after {
     clear: both;
+}
+
+html, body {
+    height: 100%;
+}
+
+/* wrapper */
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
 }
 
 /* burger menu */
@@ -121,6 +133,71 @@ nav, .logout {
 .logo {
 	display: none;
 }
+
+/* footer */
+
+.footer {
+    flex-shrink: 0;
+    background: #0c96a3;
+    color: #fff;
+    text-align: center;
+    padding: 50px;
+}
+
+.footer .menu {
+    margin-bottom: 20px;
+}
+
+.footer .menu .submenu {
+    display: flex;
+    flex-direction: column;
+}
+
+/* container */
+
+.container {
+    flex: 1 0 auto;
+    padding: 0 40px;
+}
+
+/* heroTop */
+
+ .hero {
+    display: flex;
+    flex-direction: column;
+ }
+
+ .heroImage {
+    padding: 200px 0;
+    background:#000;
+ }
+
+ .hero .title {
+     margin: 50px 0;
+     padding: 0 50px;
+ }
+
+ /* city-reccomend */
+
+ .city-recommend,  .accomodation-type
+ {
+     text-align: center;
+     margin-bottom: 50px;
+ }
+
+ .city-recommend h3, .accomodation-type h3 {
+     margin-bottom: 30px;
+ }
+
+ .city-recommend .cityList, .accomodation-type .typeList {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-around;
+ }
+
+ .city-recommend .cityList .city, .accomodation-type .typeList .type {
+     margin-bottom: 30px;
+ }
 
 /* DESKTOP */
 
@@ -208,5 +285,22 @@ nav, .logout {
 	.logo h1 a {
 		background-image: url("#");
 		background-size: cover;
-	}
+    }
+    
+    /* footer */
+
+    .footer {
+        padding: 50px 100px;
+    }
+
+    .footer .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    /* contaner */
+    .container {
+        padding: 0 100px;
+    }
 }
