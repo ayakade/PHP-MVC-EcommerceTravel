@@ -3,6 +3,10 @@ session_start();
 
 include("controllers/Controller.php");
 
+include("models/Cities.php");
+
+include("models/Types.php");
+
 include("libs/DB.php");
 include("libs/Errors.php");
 
