@@ -9,9 +9,9 @@
         <div id="flyoutMenu">
         <?php
             $arrMenu = array(
-                array('menu'=>'Home', 'link'=>'#'),
-                array('menu'=>'Assignments', 'link'=>'#'),
-                array('menu'=>'Grades', 'link'=>'#')
+                array('menu'=>'City', 'link'=>'#'),
+                array('menu'=>'Type', 'link'=>'#'),
+                array('menu'=>'Sign In', 'link'=>'#')
             );
            
             foreach ($arrMenu as $key => $nav) {
