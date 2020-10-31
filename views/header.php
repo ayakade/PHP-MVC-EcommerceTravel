@@ -24,7 +24,7 @@
     </div><!-- .burger menu -->
 
     <div class="logo">
-        <a href="index.php?controller=user&action=main&"><h1>##</h1></a>
+        <a href="index.php"><h1>##</h1></a>
     </div><!-- .logo -->
 
     <nav>
