@@ -11,7 +11,7 @@
             $arrMenu = array(
                 array('menu'=>'City', 'link'=>'#'),
                 array('menu'=>'Type', 'link'=>'#'),
-                array('menu'=>'Sign In', 'link'=>'#')
+                array('menu'=>'Login', 'link'=>'index.php?controller=user&action=login')
             );
            
             foreach ($arrMenu as $key => $nav) {
