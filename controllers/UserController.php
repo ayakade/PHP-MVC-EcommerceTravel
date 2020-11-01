@@ -40,7 +40,7 @@ Class UserController extends Controller {
 
         $this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
 
-		$this->loadLastView("views/main.php"); // final view
+		$this->loadLastView("views/main-user.php"); // final view
 	}
 
 	// new user sign up
@@ -52,12 +52,42 @@ Class UserController extends Controller {
 	// user main page after login 
 	public function userMain() 
 	{
-		$this->loadRoute("Global", "header", "headerHTML"); // load header
-        $this->loadRoute("Global", "footer", "footerHTML"); // load footer
+		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
 
-        $this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
+		$this->loadView("views/user-main.php", 1, "contentHTML"); 
+        $this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
 
-		$this->loadLastView("views/main.php"); // final view
+		$this->loadLastView("views/main-user.php"); // final view
+	}
+
+	// user's booking list
+	public function bookingList()
+	{
+		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
+
+		$this->loadView("views/user-booking.php", 1, "contentHTML"); 
+		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-user.php"); // final view
+	}
+
+	 // user's account info
+	 public function account()
+	 {
+		 $this->loadRoute("Global", "userNav", "navHTML"); // load nav
+ 
+		 $this->loadView("views/user-account.php", 1, "contentHTML"); 
+		 $this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
+ 
+		 $this->loadLastView("views/main-user.php"); // final view
+	 }
+
+
+	// user logout
+    public function doLogOut()
+    {
+		unset($_SESSION["userId"]);
+		$this->go("public", "main");
 	}
 }
 
