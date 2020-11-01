@@ -1,4 +1,33 @@
 <div class="account">
-    This is user account page.
-    User can check their account info
+    <h3>Your account info</h3>
+
+    <form method="post" action="index.php" id="accountInfo">
+        <input type="hidden" name="controller" value="user" />
+		<input type="hidden" name="action" value="doUpdate" />
+        <input type="hidden" name="id" value="<?=$this->oUsers->id?>"/>
+        
+
+        <div class="fieldgroup">
+            <label>First name</label>
+            <input type="text" name="strFirstName" value="<?=$this->oUsers->strFirstName?>">
+        </div><!-- end of fieldgroup -->
+
+        <div class="fieldgroup">
+            <label>Last name</label>
+            <input type="text" name="strLastName" value="<?=$this->oUsers->strLastName?>">
+        </div><!-- end of fieldgroup -->
+
+        <div class="fieldgroup">
+            <label>Email address</label>
+            <input type="text" name="strEmail" value="<?=$this->oUsers->strEmail?>">
+        </div><!-- end of fieldgroup -->
+
+        <div class="fieldgroup">
+            <label>PhoneNumber</label>
+            <input type="text" name="strPhoneNumber" value="<?=$this->oUsers->strPhoneNumber?>">
+        </div><!-- end of fieldgroup -->
+
+        <input type="submit" value="Update info">
+        
+    </form>
 </div><!-- .account / user-account.php -->
