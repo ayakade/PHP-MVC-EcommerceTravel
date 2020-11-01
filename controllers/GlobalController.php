@@ -16,8 +16,14 @@ Class GlobalController extends Controller {
 	}	
 
 	// admin nav
-	public function nav()
+	public function adminNav()
 	{
-		$this->loadView("views/nav.php"); // load the html and append to $this->content
+		$this->loadView("views/admin-nav.php"); // load the html and append to $this->content
+	}	
+
+	// user nav
+	public function userNav()
+	{
+		$this->loadView("views/user-nav.php"); // load the html and append to $this->content
 	}	
 }
