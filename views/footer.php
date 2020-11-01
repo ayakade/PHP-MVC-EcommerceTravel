@@ -19,9 +19,9 @@
         </div><!-- .menu -->
 
         <div class="menu col-12 col-lg-4">
-            <i class="fab fa-facebook-square"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-instagram"></i>
+            <a href="#"><i class="fab fa-facebook-square"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
         </div><!-- .menu -->
     </div>
 
