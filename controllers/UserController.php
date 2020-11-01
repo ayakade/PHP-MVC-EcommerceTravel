@@ -18,7 +18,7 @@ Class UserController extends Controller {
 	// user login
 	public function doLogIn()
 	{
-		$_SESSION["userId"] = Users::LogIn($_POST["strEmail"], $_POST["strPassword"]);
+		$_SESSION["userId"] = Users::logIn($_POST["strEmail"], $_POST["strPassword"]);
 
 		if ($_SESSION["userId"])
 		{
@@ -73,15 +73,23 @@ Class UserController extends Controller {
 
 	 // user's account info
 	 public function account()
-	 {
-		 $this->loadRoute("Global", "userNav", "navHTML"); // load nav
- 
-		 $this->loadView("views/user-account.php", 1, "contentHTML"); 
-		 $this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
- 
-		 $this->loadLastView("views/main-user.php"); // final view
-	 }
+	{
+		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
 
+		$this->loadData(Users::getUserInfo(), "oUsers"); // this now gives me a $this->oUsers
+		$this->loadView("views/user-account.php", 1, "contentHTML"); 
+		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-user.php"); // final view
+	}
+
+	// account info update
+	public function doUpdate() 
+	{
+		$user = Users::update($_POST["id"], $_POST["strFirstName"], $_POST["strLastName"], $_POST["strEmail"], $_POST["strPhoneNumber"]);
+
+		$this->go("user", "account"); 
+	}
 
 	// user logout
     public function doLogOut()
