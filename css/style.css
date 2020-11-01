@@ -115,7 +115,7 @@ html, body {
 
 /* nav */
 
-nav, .logout {
+nav {
 	display: none;
 }
 
