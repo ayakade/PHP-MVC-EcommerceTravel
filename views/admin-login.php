@@ -5,8 +5,8 @@
 		<input type="hidden" name="action" value="doLogin" />
 
         <div class="fieldgroup required">
-            <label>Email address</label>
-            <input type="text" name="strEmail" value="" />
+            <label>Username</label>
+            <input type="text" name="strUsername" value="" />
         </div><!-- .fieldgroup -->
 
         <div class="fieldgroup required">
