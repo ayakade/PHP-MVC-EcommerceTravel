@@ -26,7 +26,16 @@ Class Users {
 
 			return false;
 		}
-	}
+    }
+ 
+    // check all users email
+    public static function getUserByEmail($strEmail) {
+        $user = DB::query("SELECT * FROM users WHERE strEmail='".$strEmail."'");
+
+        $userFound = mysqli_fetch_assoc($user);
+
+        return $userFound;
+    }
 }
 
 ?>
