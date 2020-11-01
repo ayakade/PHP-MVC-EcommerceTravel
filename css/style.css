@@ -301,6 +301,7 @@ nav {
 
     /* contaner */
     .container {
+		margin-top: 120px;
         padding: 0 100px;
     }
 }
