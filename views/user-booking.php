@@ -1,4 +1,3 @@
 <div class="bookingList">
-    This is user booking List.
-    User can check their booking info
+    <h3>Your booking</h3>
 </div><!-- .bookingList / user-booking.php -->
