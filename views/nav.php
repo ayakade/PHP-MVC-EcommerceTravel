@@ -10,9 +10,9 @@
 		<div id="flyoutMenu">
         <?php
             $arrMenu = array(
-                array('menu'=>'Home', 'link'=>'#', 'icon'=>''),
-                array('menu'=>'Booking', 'link'=>'#', 'icon'=>''),
-                array('menu'=>'Users', 'link'=>'#', 'icon'=>''),
+                array('menu'=>'Home', 'link'=>'index.php?controller=admin&action=adminMain', 'icon'=>''),
+                array('menu'=>'Booking', 'link'=>'index.php?controller=admin&action=bookingList', 'icon'=>''),
+                array('menu'=>'Customers', 'link'=>'index.php?controller=admin&action=customerList', 'icon'=>''),
                 array('menu'=>'Logout', 'link'=>'#', 'icon'=>'')
             );
            
