@@ -30,30 +30,45 @@ Class AdminController extends Controller {
 		$password = $_POST["strPassword"];
 		$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-		// echo $passwordHash;
-
-		$_SESSION["userId"] = Employees::logIn($username);
-
-		// echo $_SESSION["userId"];
-
-		// get user info with user ID
-		$user = Employees::getUserInfo($_SESSION["userId"]);
-		// print_r($user);
-
-		if ($user)
+		// if username & password are given
+		if(!($username=="" OR $password==""))
 		{
-			// check if password matches
-			if (password_verify($user->strPassword, $passwordHash)) 
-			{
-				// go to user main page if match
-				$this->go("admin", "adminMain"); 
+			// echo $passwordHash;
 
-			} else {
-				echo "password not correct";
+			$_SESSION["userId"] = Employees::logIn($username);
+
+			// echo $_SESSION["userId"];
+
+			// get user info with user ID
+			$user = Employees::getUserInfo($_SESSION["userId"]);
+			// print_r($user);
+
+			if ($user)
+			{
+				// check if password matches
+				if (password_verify($user->strPassword, $passwordHash)) 
+				{
+					// go to user main page if match
+					$this->go("admin", "adminMain"); 
+
+				} else {
+					echo "password not correct";
+				}
 			}
 
-		} else {
-			echo "errrooorrrrr";
+		// if username & password are not given
+		} else if ($username=="" && $password==""){
+			echo "enter your user name and  password";
+			//$this->loadView("views/login.php");
+			// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
+		// if username are not given
+		} else if ($username=="") {
+			echo "enter your user name";
+			//$this->loadView("views/login.php");
+			// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
+		// if password are not given
+		} else if ($password=="") {
+			echo "enter your password";
 			//$this->loadView("views/login.php");
 			// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
 		}
