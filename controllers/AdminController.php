@@ -9,21 +9,6 @@ Class AdminController extends Controller {
 	}
 
 	// admin user login
-	// public function doLogIn()
-	// {
-	// 	$_SESSION["userId"] = Employees::LogIn($_POST["strUsername"], $_POST["strPassword"]);
-
-	// 	if ($_SESSION["userId"])
-	// 	{
-	// 		// go to admin main page if email and password match
-	// 		$this->go("admin", "adminMain"); 
-	// 	} else {
-	// 		//$this->loadView("views/login.php");
-	// 		// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
-	// 	}
-	// }
-
-	// user login
 	public function doLogIn()
 	{
 		$username = $_POST["strUsername"];
