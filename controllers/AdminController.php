@@ -29,14 +29,12 @@ Class AdminController extends Controller {
 		$username = $_POST["strUsername"];
 		$password = $_POST["strPassword"];
 		$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+		// echo $passwordHash;
 
 		// if username & password are given
 		if(!($username=="" OR $password==""))
 		{
-			// echo $passwordHash;
-
 			$_SESSION["userId"] = Employees::logIn($username);
-
 			// echo $_SESSION["userId"];
 
 			// get user info with user ID
@@ -59,18 +57,14 @@ Class AdminController extends Controller {
 		// if username & password are not given
 		} else if ($username=="" && $password==""){
 			echo "enter your user name and  password";
-			//$this->loadView("views/login.php");
-			// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
+		
 		// if username are not given
 		} else if ($username=="") {
 			echo "enter your user name";
-			//$this->loadView("views/login.php");
-			// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
+
 		// if password are not given
 		} else if ($password=="") {
 			echo "enter your password";
-			//$this->loadView("views/login.php");
-			// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
 		}
 	}
 
