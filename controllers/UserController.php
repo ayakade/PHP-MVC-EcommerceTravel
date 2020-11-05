@@ -18,13 +18,34 @@ Class UserController extends Controller {
 	// user login
 	public function doLogIn()
 	{
-		$_SESSION["userId"] = Users::logIn($_POST["strEmail"], $_POST["strPassword"]);
+		$useremail = $_POST["strEmail"];
+		$password = $_POST["strPassword"];
+		$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-		if ($_SESSION["userId"])
+		// echo $passwordHash;
+
+		$_SESSION["userId"] = Users::logIn($useremail);
+
+		// echo $_SESSION["userId"];
+
+		// get user info with user ID
+		$user = Users::getUserInfo($_SESSION["userId"]);
+		// print_r($user);
+
+		if ($user)
 		{
-			// go to user main page if email and password match
-			$this->go("user", "userMain"); 
+			// check if password matches
+			if (password_verify($user->strPassword, $passwordHash)) 
+			{
+				// go to user main page if match
+				$this->go("user", "userMain"); 
+
+			} else {
+				echo "password not correct";
+			}
+
 		} else {
+			echo "errrooorrrrr";
 			//$this->loadView("views/login.php");
 			// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
 		}
@@ -76,7 +97,7 @@ Class UserController extends Controller {
 	{
 		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
 
-		$this->loadData(Users::getUserInfo(), "oUsers"); // this now gives me a $this->oUsers
+		$this->loadData(Users::getUserInfo($_SESSION["userId"]), "oUsers"); // this now gives me a $this->oUsers
 		$this->loadView("views/user-account.php", 1, "contentHTML"); 
 		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
 
