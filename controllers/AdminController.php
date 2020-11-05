@@ -9,19 +9,56 @@ Class AdminController extends Controller {
 	}
 
 	// admin user login
+	// public function doLogIn()
+	// {
+	// 	$_SESSION["userId"] = Employees::LogIn($_POST["strUsername"], $_POST["strPassword"]);
+
+	// 	if ($_SESSION["userId"])
+	// 	{
+	// 		// go to admin main page if email and password match
+	// 		$this->go("admin", "adminMain"); 
+	// 	} else {
+	// 		//$this->loadView("views/login.php");
+	// 		// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
+	// 	}
+	// }
+
+	// user login
 	public function doLogIn()
 	{
-		$_SESSION["userId"] = Employees::LogIn($_POST["strUsername"], $_POST["strPassword"]);
+		$username = $_POST["strUsername"];
+		$password = $_POST["strPassword"];
+		$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-		if ($_SESSION["userId"])
+		// echo $passwordHash;
+
+		$_SESSION["userId"] = Employees::logIn($username);
+
+		// echo $_SESSION["userId"];
+
+		// get user info with user ID
+		$user = Employees::getUserInfo($_SESSION["userId"]);
+		// print_r($user);
+
+		if ($user)
 		{
-			// go to admin main page if email and password match
-			$this->go("admin", "adminMain"); 
+			// check if password matches
+			if (password_verify($user->strPassword, $passwordHash)) 
+			{
+				// go to user main page if match
+				$this->go("admin", "adminMain"); 
+
+			} else {
+				echo "password not correct";
+			}
+
 		} else {
+			echo "errrooorrrrr";
 			//$this->loadView("views/login.php");
 			// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
 		}
 	}
+
 
 	// admin main page after login 
 	public function adminMain() 
