@@ -12,9 +12,9 @@ Class Employees {
 	}
 
     // employees login
-	public static function LogIn($strUsername, $strPassword)
+	public static function LogIn($strUsername)
 	{
-		$arrUser = DB::query("SELECT * FROM employees WHERE strUsername='".$strUsername."' and strPassword='".$strPassword."'");
+		$arrUser = DB::query("SELECT * FROM employees WHERE strUsername='".$strUsername."'");
 
 		print_r($arrUser);
 
@@ -26,7 +26,18 @@ Class Employees {
 
 			return false;
 		}
-    }
+	}
+	
+	// employees info 
+	public static function getUserInfo($userId)
+	{
+		// $user = DB::query("SELECT * FROM users WHERE id=".$_SESSION["userId"]);
+		$user = DB::query("SELECT * FROM employees WHERE id='".$userId."'");
+
+		// acting as a factory
+		return new Employees($user[0]); // factory
+		// print_r(new Users($user[0]));
+	}
 }
 
 ?>
