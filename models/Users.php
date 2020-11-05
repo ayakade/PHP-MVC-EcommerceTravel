@@ -12,12 +12,13 @@ Class Users {
         $this->strPassword = $userData["strPassword"];
 	}
 
-    // user login
-	public static function logIn($strEmail, $strPassword)
+	// user login
+	// get the user matches email
+	public static function logIn($strEmail)
 	{
-		$arrUser = DB::query("SELECT * FROM users WHERE strEmail='".$strEmail."' and strPassword='".$strPassword."'");
+		$arrUser = DB::query("SELECT * FROM users WHERE strEmail='".$strEmail."'");
 
-		print_r($arrUser);
+		// print_r($arrUser);
 
 		if($arrUser)
 		{
@@ -40,12 +41,14 @@ Class Users {
 	}
 	
 	// user info 
-	public static function getUserInfo()
+	public static function getUserInfo($userId)
 	{
-		$user = DB::query("SELECT * FROM users WHERE id=".$_SESSION["userId"]);
+		// $user = DB::query("SELECT * FROM users WHERE id=".$_SESSION["userId"]);
+		$user = DB::query("SELECT * FROM users WHERE id='".$userId."'");
 
 		// acting as a factory
 		return new Users($user[0]); // factory
+		// print_r(new Users($user[0]));
 	}
 
 	// update user info
