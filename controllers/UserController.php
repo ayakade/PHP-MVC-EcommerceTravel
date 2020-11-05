@@ -23,31 +23,42 @@ Class UserController extends Controller {
 		$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
 		// echo $passwordHash;
-
-		$_SESSION["userId"] = Users::logIn($useremail);
-
-		// echo $_SESSION["userId"];
-
-		// get user info with user ID
-		$user = Users::getUserInfo($_SESSION["userId"]);
-		// print_r($user);
-
-		if ($user)
+		
+		// if useremail & password are given
+		if(!($useremail=="" OR $password==""))
 		{
-			// check if password matches
-			if (password_verify($user->strPassword, $passwordHash)) 
-			{
-				// go to user main page if match
-				$this->go("user", "userMain"); 
+			$_SESSION["userId"] = Users::logIn($useremail);
 
-			} else {
-				echo "password not correct";
+			// echo $_SESSION["userId"];
+
+			// get user info with user ID
+			$user = Users::getUserInfo($_SESSION["userId"]);
+			// print_r($user);
+
+			if ($user)
+			{
+				// check if password matches
+				if (password_verify($user->strPassword, $passwordHash)) 
+				{
+					// go to user main page if match
+					$this->go("user", "userMain"); 
+
+				} else {
+					echo "password not correct";
+				}
 			}
 
-		} else {
-			echo "errrooorrrrr";
-			//$this->loadView("views/login.php");
-			// $this->go("public", "errorLogin"); // if details entered do not exist in the db redirect user back to login form with error
+		// if useremail & password are not given
+		} else if ($useremail=="" && $password==""){
+			echo "enter your user name and  password";
+
+			// if useremail are not given
+		} else if ($useremail=="") {
+			echo "enter your user email";
+
+			// if password are not given
+		} else if ($password=="") {
+			echo "enter your password";
 		}
 	}
 
