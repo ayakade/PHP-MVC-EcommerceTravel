@@ -16,7 +16,7 @@ Class Employees {
 	{
 		$arrUser = DB::query("SELECT * FROM employees WHERE strUsername='".$strUsername."'");
 
-		print_r($arrUser);
+		// print_r($arrUser);
 
 		if($arrUser)
 		{
