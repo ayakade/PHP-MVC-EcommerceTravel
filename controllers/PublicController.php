@@ -17,7 +17,7 @@ Class PublicController extends Controller{
         $this->loadView("views/city-recommend.php", 1, "contentHTML"); 
 
         $this->loadData(Types::getAllType(), "oTypes"); // this now gives me a $this->oTypes
-        $this->loadView("views/accomodation-type.php", 1, "contentHTML"); 
+        $this->loadView("views/accommodation-type.php", 1, "contentHTML"); 
 
         $this->loadView("views/hero-layout.php", 1, "content"); // save the results of this view, into $this->content
 
