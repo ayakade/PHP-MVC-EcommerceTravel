@@ -63,7 +63,35 @@ Class AdminController extends Controller {
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-admin.php"); // final view
-    }
+	}
+	
+	// accomodation list
+	public function accomodationList() 
+	{
+		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
+
+        $this->loadView("views/admin-accommodations.php", 1, "contentHTML"); 
+        $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-admin.php"); // final view
+	}
+	
+	// accomodation detail
+	public function accomodation() 
+	{
+		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
+
+        $this->loadView("views/admin-accommodation.php", 1, "contentHTML"); 
+        $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-admin.php"); // final view
+	}
+	
+	// save/update accomodation info
+	public function saveAccomodation()
+	{
+
+	}
     
     // customer's booking list
     public function bookingList()
