@@ -4,7 +4,7 @@ Class DB {
 	var $debug = true;
 
     // connect db
-	public function connect(){
+	static public function connect(){
 		$dbDetails = parse_ini_file("../e-commerce.ini"); 
 		
 		return mysqli_connect($dbDetails["host"], $dbDetails["user"], $dbDetails["pass"], $dbDetails["dbname"]);
