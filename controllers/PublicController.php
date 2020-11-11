@@ -22,5 +22,24 @@ Class PublicController extends Controller{
         $this->loadView("views/hero-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main.php"); // final view
+    }
+
+    // member login page
+	public function memberLogin() 
+	{
+		$this->loadRoute("Global", "header", "headerHTML"); // load header
+		$this->loadRoute("Global", "footer", "footerHTML"); // load footer
+		
+		$this->loadView("views/login.php", 1, "contentHTML"); 
+
+        $this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main.php"); // final view
+	}
+    
+    // admin login page
+	public function adminLogin() 
+	{
+		$this->loadLastView("views/admin-login.php"); // final view
 	}
 }

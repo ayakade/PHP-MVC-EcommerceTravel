@@ -2,19 +2,6 @@
 
 Class UserController extends Controller {
 
-	// login page
-	public function login() 
-	{
-		$this->loadRoute("Global", "header", "headerHTML"); // load header
-		$this->loadRoute("Global", "footer", "footerHTML"); // load footer
-		
-		$this->loadView("views/login.php", 1, "contentHTML"); 
-
-        $this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
-
-		$this->loadLastView("views/main.php"); // final view
-	}
-
 	// user login
 	public function doLogIn()
 	{
@@ -128,6 +115,17 @@ Class UserController extends Controller {
     {
 		unset($_SESSION["userId"]);
 		$this->go("public", "main");
+	}
+
+	// if session is out go back customer login page
+	public function pretrip(){
+
+		if($_SESSION["userId"]=="")
+		{
+			$this->go("public", "memberLogin");
+		} else {
+			$this->oUser = Users::getUserInfo($_SESSION["userId"]);
+		}
 	}
 }
 

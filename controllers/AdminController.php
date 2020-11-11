@@ -2,11 +2,7 @@
 
 Class AdminController extends Controller {
 
-	// login page
-	public function login() 
-	{
-		$this->loadLastView("views/admin-login.php"); // final view
-	}
+	
 
 	// admin user login
 	public function doLogIn()
@@ -70,6 +66,7 @@ Class AdminController extends Controller {
 	{
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
+		$this->loadData(Accommodations::getAll(), "oAccommodations");
         $this->loadView("views/admin-accommodations.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
@@ -77,20 +74,49 @@ Class AdminController extends Controller {
 	}
 	
 	// accomodation detail
-	public function accomodation() 
+	public function accommodation() 
 	{
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
+		$this->loadData(Accommodations::getAccommodation(), "oAccommodations");
         $this->loadView("views/admin-accommodation.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-admin.php"); // final view
 	}
+
+	// add new accomodation 
+	public function addNew() 
+	{
+		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
+
+        $this->loadView("views/admin-new-accommodation.php", 1, "contentHTML"); 
+        $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-admin.php"); // final view
+	}
 	
-	// save/update accomodation info
+	// save new accomodation info
 	public function saveAccomodation()
 	{
+		if($_POST["strName"] && $_POST["strDescription"] && $_POST["image"] && $_POST["alt"])
+		{
+			//upload photo 
+			$profilePhotoName = $_FILES[$fileFieldName]["name"]; // photo name
 
+			move_uploaded_file($_FILES[$fileFieldName]["tmp_name"], "assets/".$_FILES[$fileFieldName]["name"]);
+
+			$con = DB::connect();
+			$sql = "INSERT INTO accommodations(strName, strDescription) values ('".$_POST["strName"]."', '".$_POST["strDescription"]."')";
+		
+			mysqli_query($con, $sql);
+
+			// if successed new assignment
+			$this->go("admin", "accomodationList"); 
+		} else {
+			// if unsuccessful
+			echo "unsuccessful";
+		}
 	}
     
     // customer's booking list
@@ -120,6 +146,17 @@ Class AdminController extends Controller {
     {
 		unset($_SESSION["userId"]);
 		$this->go("admin", "login");
+	}
+
+	// if session is out go back admin login page
+	public function pretrip(){
+
+		if($_SESSION["userId"]=="")
+		{
+			$this->go("public", "adminLogin");
+		} else {
+			$this->oUser = Employees::getUserInfo($_SESSION["userId"]);
+		}
 	}
 }
 
