@@ -2,8 +2,6 @@
 
 Class AdminController extends Controller {
 
-	
-
 	// admin user login
 	public function doLogIn()
 	{
@@ -31,24 +29,27 @@ Class AdminController extends Controller {
 					$this->go("admin", "adminMain"); 
 
 				} else {
-					echo "password not correct";
+					$this->go("public", "aError"); 
+					// echo "password not correct";
 				}
 			}
 
 		// if username & password are not given
 		} else if ($username=="" && $password==""){
-			echo "enter your user name and  password";
+			$this->go("public", "aError"); 
+			// echo "enter your user name and  password";
 		
 		// if username are not given
 		} else if ($username=="") {
-			echo "enter your user name";
+			$this->go("public", "aError"); 
+			// echo "enter your user name";
 
 		// if password are not given
 		} else if ($password=="") {
-			echo "enter your password";
+			$this->go("public", "aError"); 
+			// echo "enter your password";
 		}
 	}
-
 
 	// admin main page after login 
 	public function adminMain() 
@@ -145,7 +146,7 @@ Class AdminController extends Controller {
     public function doLogOut()
     {
 		unset($_SESSION["userId"]);
-		$this->go("admin", "login");
+		$this->go("public", "adminLogin");
 	}
 
 	// if session is out go back admin login page
