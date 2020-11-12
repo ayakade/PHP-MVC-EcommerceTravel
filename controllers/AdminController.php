@@ -2,6 +2,10 @@
 
 Class AdminController extends Controller {
 
+	var $content = "";
+	var $title = "All";
+	var $controller = "admin";
+
 	// admin user login
 	public function doLogIn()
 	{
@@ -126,10 +130,10 @@ Class AdminController extends Controller {
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 		
 		$this->loadData(Bookings::getAllUpcomingBookings(), "oBookings"); 
-		$this->loadView("views/admin-upcoming-bookings.php", 1, "upcomingHTML"); 
+		$this->loadView("views/upcoming-bookings.php", 1, "upcomingHTML"); 
 
 		$this->loadData(Bookings::getAllPastBookings(), "oBookings"); 
-		$this->loadView("views/admin-past-bookings.php", 1, "pastHTML"); 
+		$this->loadView("views/past-bookings.php", 1, "pastHTML"); 
 
         $this->loadView("views/bookings.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
