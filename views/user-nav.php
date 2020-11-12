@@ -10,7 +10,7 @@
 		<div id="flyoutMenu">
         <?php
             $arrMenu = array(
-                array('menu'=>'Home', 'link'=>'index.php?controller=user&action=userMain', 'icon'=>''),
+                // array('menu'=>'Home', 'link'=>'index.php?controller=user&action=userMain', 'icon'=>''),
                 array('menu'=>'Booking', 'link'=>'index.php?controller=user&action=bookingList', 'icon'=>''),
                 array('menu'=>'Account', 'link'=>'index.php?controller=user&action=account', 'icon'=>''),
                 array('menu'=>'Logout', 'link'=>'index.php?controller=user&action=doLogOut', 'icon'=>'')
