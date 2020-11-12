@@ -108,7 +108,7 @@ Class UserController extends Controller {
 		$this->loadData(Bookings::getPastBookings($_SESSION["userId"]), "oBookings"); 
 		$this->loadView("views/user-past-bookings.php", 1, "pastHTML"); 
 
-		$this->loadView("views/user-bookings.php", 1, "contentHTML"); 
+		$this->loadView("views/bookings.php", 1, "contentHTML"); 
 		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-user.php"); // final view
