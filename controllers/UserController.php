@@ -31,21 +31,25 @@ Class UserController extends Controller {
 					$this->go("user", "userMain"); 
 
 				} else {
-					echo "password not correct";
+					$this->go("public", "mError"); 
+					// echo "password not correct";
 				}
 			}
 
 		// if useremail & password are not given
 		} else if ($useremail=="" && $password==""){
-			echo "enter your user name and  password";
+			$this->go("public", "mError"); 
+			// echo "enter your user name and  password";
 
 			// if useremail are not given
 		} else if ($useremail=="") {
-			echo "enter your user email";
+			$this->go("public", "mError"); 
+			// echo "enter your user email";
 
 			// if password are not given
 		} else if ($password=="") {
-			echo "enter your password";
+			$this->go("public", "mError"); 
+			// echo "enter your password";
 		}
 	}
 
@@ -84,6 +88,24 @@ Class UserController extends Controller {
 	{
 		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
 
+		$this->loadData(Bookings::getUpcomingBookings($_SESSION["userId"]), "oBookings"); 
+		$this->loadView("views/user-upcoming-bookings.php", 1, "upcomingHTML"); 
+
+		$this->loadData(Bookings::getPastBookings($_SESSION["userId"]), "oBookings"); 
+		$this->loadView("views/user-past-bookings.php", 1, "pastHTML"); 
+
+		$this->loadView("views/user-bookings.php", 1, "contentHTML"); 
+		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-user.php"); // final view
+	}
+
+	// user's specific booking info
+	public function booking()
+	{
+		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
+
+		$this->loadData(Bookings::getBookingInfo($_GET["bId"]), "oBookings"); 
 		$this->loadView("views/user-booking.php", 1, "contentHTML"); 
 		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
 
@@ -114,7 +136,7 @@ Class UserController extends Controller {
     public function doLogOut()
     {
 		unset($_SESSION["userId"]);
-		$this->go("public", "main");
+		$this->go("public", "memberLogin");
 	}
 
 	// if session is out go back customer login page
