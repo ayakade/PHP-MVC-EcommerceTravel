@@ -123,19 +123,50 @@ Class AdminController extends Controller {
     // customer's booking list
     public function bookingList()
     {
-        $this->loadRoute("Global", "adminNav", "navHTML"); // load nav
+		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
+		
+		$this->loadData(Bookings::getAllUpcomingBookings(), "oBookings"); 
+		$this->loadView("views/admin-upcoming-bookings.php", 1, "upcomingHTML"); 
 
-        $this->loadView("views/admin-booking.php", 1, "contentHTML"); 
+		$this->loadData(Bookings::getAllPastBookings(), "oBookings"); 
+		$this->loadView("views/admin-past-bookings.php", 1, "pastHTML"); 
+
+        $this->loadView("views/bookings.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-admin.php"); // final view
-    }
+	}
+	
+	// specific booking info
+	public function booking()
+	{
+		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
+
+		$this->loadData(Bookings::getBookingInfo($_GET["bId"]), "oBookings"); 
+		$this->loadView("views/admin-booking.php", 1, "contentHTML"); 
+		$this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-admin.php"); // final view
+	}
 
     // customer's list
     public function customerList() 
     {
         $this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
+		$this->loadData(Users::getAll(), "oCustomers");
+        $this->loadView("views/admin-customers.php", 1, "contentHTML"); 
+        $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-admin.php"); // final view
+	}
+	
+	// specific customer's info
+    public function customer() 
+    {
+        $this->loadRoute("Global", "adminNav", "navHTML"); // load nav
+
+		$this->loadData(Users::getUser($_GET["aId"]), "oCustomers");
         $this->loadView("views/admin-customer.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
