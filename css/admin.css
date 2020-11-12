@@ -201,19 +201,24 @@ input[type="submit"] {
     margin-bottom: 50px;
 }
 
+.customer table {
+	margin: 0 auto;
+}
+
 .customer table tbody{
     display: flex;
-    text-align: left;
+	text-align: left;
+	width: 300px;
 }
 
 .customer table tr {
     display: flex;
-    flex-direction: column;
+	flex-direction: column;
+	width: 50%;
 }
 
 .customer table th, .customer table td {
 	margin-bottom: 20px;
-	width: 200px;
 }
 
 /* booking list */
@@ -373,16 +378,21 @@ input[type="submit"] {
 	/* customer */
 	
 	.customer {
-		width: 1000px;
+		width: 600px;
+		text-align: left;
 	}
 
     .customer .info {
         display: flex;
-        margin-bottom: 70px;
+        margin-bottom: 30px;
     }
 
     .customer .info img {
         margin: 0;
+	}
+
+	.customer .info table {
+		margin: 0;
 	}
 	
 	.customer .info table:nth-child(2) {
@@ -391,5 +401,37 @@ input[type="submit"] {
 
 	.customer .info table tr {
 		width: 200px;
+	}
+
+	/* booking list */
+
+	.bookingList {
+		width: 1000px;
+		margin: 0 auto;
+	}
+
+	.bookingList h3 {
+		margin-bottom: 50px;
+	}
+
+	.bookingList .row {
+		display: flex;
+	}
+
+	.bookingList .bookings {
+		width: 500px;
+	}
+
+	/* booking */
+
+	.booking-info .booking h3 {
+		margin-bottom: 50px;
+	}
+
+	.booking-info .booking .row {
+		display: flex;
+		width: 750px;
+		margin: 0 auto;
+		margin-bottom: 50px;
 	}
 }
