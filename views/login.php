@@ -1,4 +1,4 @@
-<div class="login">
+<div class="login form">
     <h2>Login</h2>
     <form id="login" method="post" action="index.php">
         <input type="hidden" name="controller" value="user" />
@@ -14,10 +14,10 @@
             <input type="password" name="strPassword" value="" />
         </div><!-- .fieldgroup -->
 
-        <input type="submit" value="Login">
+        <div class="btn"><input class="cta-secondary" type="submit" value="Login"></div>
     </form>
 
-    <p>Need an account? <strong><a href="index.php?controller=user&action=signup">Sign up now</a></strong></p>
+    <p>Need an account? <strong><a href="index.php?controller=public&action=signup">Sign up now</a></strong></p>
 
 </div><!-- .login / login.php -->
 
