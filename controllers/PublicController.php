@@ -35,11 +35,30 @@ Class PublicController extends Controller{
         $this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main.php"); // final view
+    }
+    
+    // member login error page
+	public function mError() 
+	{
+		$this->loadRoute("Global", "header", "headerHTML"); // load header
+		$this->loadRoute("Global", "footer", "footerHTML"); // load footer
+		
+		$this->loadView("views/login-error.php", 1, "contentHTML"); 
+
+        $this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main.php"); // final view
 	}
     
     // admin login page
 	public function adminLogin() 
 	{
 		$this->loadLastView("views/admin-login.php"); // final view
+    }
+    
+    // admin login error page
+	public function aError() {
+		$this->loadLastView("views/admin-login-error.php"); // final view
 	}
+
 }
