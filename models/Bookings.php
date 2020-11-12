@@ -44,7 +44,7 @@ Class Bookings {
         return $bookingArray;
     }
 
-    // customer: get their upcoming bookings  
+    // user page: get their upcoming bookings  
     public static function getUpcomingBookings($userId)
     {
         $bookings = DB::query("SELECT bookings.id, userId,accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
@@ -77,7 +77,7 @@ Class Bookings {
         }
     }
 
-    // customer: get their past bookings  
+    // user page: get their past bookings  
     public static function getPastBookings($userId)
     {
         $bookings = DB::query("SELECT bookings.id, userId,accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
@@ -108,6 +108,72 @@ Class Bookings {
             return $bookingArray;
         }
     }
+
+    // admin page: get all upcoming bookings  
+    public static function getAllUpcomingBookings()
+    {
+        $bookings = DB::query("SELECT bookings.id, userId,accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
+        FROM bookings
+        LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
+        LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN discounts ON bookings.discountId = discounts.id
+        WHERE status = 0"); 
+
+        // if there's no upcoming bookings
+        if($bookings == "") {
+            //make an object with no booking data
+            $bookingArray = array((object) array("id" => "0", 'accommodation' => 'no upcoming trip'));
+
+            return $bookingArray;
+
+        } else {
+
+            // acting as a factory
+            $bookingArray = array(); // set default(empty)
+            foreach($bookings as $booking)
+            {
+            // create an instance / object for this SPECIFIC 
+            $bookingArray[] = new Bookings($booking); // put this  object onto the array
+            }
+
+            // return the list of objects
+            return $bookingArray;
+        }
+    }
+
+    // admin page: get all past bookings  
+    public static function getAllPastBookings()
+    {
+        $bookings = DB::query("SELECT bookings.id, userId,accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
+        FROM bookings
+        LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
+        LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN discounts ON bookings.discountId = discounts.id
+        WHERE status = 1"); 
+
+        // if there's no past bookings
+        if($bookings == "") {
+            //make an object with no booking data
+            $bookingArray = array((object) array("id" => "0", 'accommodation' => 'no upcoming trip'));
+
+            return $bookingArray;
+
+        } else {
+            // acting as a factory
+            $bookingArray = array(); // set default(empty)
+            foreach($bookings as $booking)
+            {
+            // create an instance / object for this SPECIFIC 
+            $bookingArray[] = new Bookings($booking); // put this  object onto the array
+            }
+
+            // return the list of objects
+            return $bookingArray;
+        }
+    }
+
 
     // get specific booking info 
     public static function getBookingInfo($id)
