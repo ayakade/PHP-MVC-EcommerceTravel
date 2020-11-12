@@ -1,9 +1,7 @@
-<!-- nav -->
-<?=$this->navHTML?>
+<div class="container col-12">
+    <!-- nav -->
+    <?=$this->navHTML?>
 
-<div class="container col-12 col-lg-9">
     <!-- put contents here -->
     <?=$this->contentHTML?>
-</div><!-- .container -->
-
-<!-- user-layout.php -->	
+</div><!-- .container / user-layout.php-->
