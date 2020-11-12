@@ -24,7 +24,7 @@
 
                 <div class="fieldgroup required">
                     <label>Password</label>
-                    <input type="text" name="strPassword" value="" />
+                    <input type="password" name="strPassword" value="" />
                 </div><!-- .fieldgroup -->
 
                 <input class="cta" type="submit" value="Login">

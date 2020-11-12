@@ -11,7 +11,7 @@
 
         <div class="fieldgroup required">
             <label>Password</label>
-            <input type="text" name="strPassword" value="" />
+            <input type="password" name="strPassword" value="" />
         </div><!-- .fieldgroup -->
 
         <input type="submit" value="Login">
