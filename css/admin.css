@@ -22,6 +22,13 @@ p {
 	font-size: 14px;
 }
 
+.cta {
+    background-color: #044b6b;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 15px;
+}
+
 /* MOBILE */
 
 .col-1 { width: 8.33%; }
@@ -58,7 +65,7 @@ p {
 }
 
 #flyoutMenu {
-	background:#0c96a3;
+	background:#3B7197;
 	text-align: center; 
 	width: 100%; 
 	height: 100vh;
@@ -107,12 +114,10 @@ nav {
 	display: none;
 }
 
-
-
 /* nav */
 
 .nav {
-	background: #0c96a3;
+	background: #3B7197;
 	height: 80px;
 	display: flex;
 	justify-content: space-between;
@@ -120,8 +125,98 @@ nav {
 	padding: 0 30px;
 }
 
+/* login */
 
+.login-wrapper {
+    background: #3B7197;
+    height: 100vh;
+    padding: 50% 0;
+}
 
+.login-wrapper .login {
+    background: #fff;
+    margin: auto;
+    padding: 50px 30px;
+    border-radius: 20px;
+}
+
+.login-wrapper .login h1 {
+    margin-bottom: 10px;
+}
+
+.login-wrapper .login .fieldgroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.login-wrapper .login .fieldgroup label{
+    margin-bottom: 5px;
+}
+
+.login-wrapper .login .fieldgroup input {
+    padding: 5px;
+}
+
+input[type="submit"] {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.error {
+	color: crimson;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+/* container */
+
+.container {
+    margin: 50px 0;
+    padding: 0 40px;
+}
+
+/* customer list */
+
+.customerList h1 {
+    margin-bottom: 20px;
+}
+
+.customerList .list li {
+    margin-left: 20px;
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+/* customer */
+.customer {
+    text-align: center;
+}
+
+.customer img {
+    width: 300px;
+    height: auto;
+    margin-bottom: 50px;
+}
+
+.customer .info {
+    margin-bottom: 50px;
+}
+
+.customer table tbody{
+    display: flex;
+    text-align: left;
+}
+
+.customer table tr {
+    display: flex;
+    flex-direction: column;
+}
+
+.customer table th, .customer table td {
+    margin-bottom: 20px;
+}
 
 /* DESKTOP */
 
@@ -175,31 +270,70 @@ nav {
 		z-index: 1;
 		top: 0;
 		left: 0;
-		background-color: skyblue;
+		background-color: #3B7197;
 		overflow-x: hidden;
-		padding: 100px 50px;
-		font-size: 25px;
+		padding: 100px 70px;
+        font-size: 25px;
+		align-items: flex-start;
+		width: 300px;
     }
     
     nav {
         display: flex;
-        flex-direction: column;
+		flex-direction: column;
+		
 	}
 
 	nav a {
 		text-decoration: none;
-		font-size: 25px;
+		font-size: 20px;
 		color: #fff;
 		margin-bottom: 40px;
-		text-align: center;
+		text-align: left;
 	}
 
 	nav a:hover {
 		color: #f1f1f1;
     }
+
+    /* login */
+
+    .login-wrapper {
+        padding: 25vh 0;
+    }
+
+    .login-wrapper .login {
+		padding: 50px 80px;
+		width: 500px;
+    }
     
+    /* container */
+
     .container {
-		margin-left:25%;
+		margin-left: 300px;
 		padding: 50px;
+    }
+    
+	/* customer */
+	
+	.customer {
+		width: 1000px;
+	}
+
+    .customer .info {
+        display: flex;
+        margin-bottom: 70px;
+    }
+
+    .customer .info img {
+        margin: 0;
+	}
+	
+	.customer .info table:nth-child(2) {
+		padding-left: 50px;
+	}
+
+	.customer .info table tr {
+		width: 200px;
 	}
 }
