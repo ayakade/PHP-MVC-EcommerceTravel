@@ -27,7 +27,7 @@
             <input type="text" name="strPhoneNumber" value="<?=$this->oUsers->strPhoneNumber?>">
         </div><!-- end of fieldgroup -->
 
-        <input type="submit" value="Update info">
+        <div class="btn"><input class="cta" type="submit" value="Update info"></div>
         
     </form>
 </div><!-- .account / user-account.php -->
