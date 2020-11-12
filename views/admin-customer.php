@@ -1,4 +1,31 @@
-<div class="customerList">
-    This is admin customer List.
-    You can check customer's info
-</div><!-- .customerList / admin-customer.php -->
+<div class="customer col-12 col-lg-12">
+
+    <div class="info">
+        <?php	
+        foreach ($this->oCustomers as $customer)
+        { 
+        ?>
+        <table>
+            <tr>
+                <th>Customer ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Phone number</th>
+            </tr>
+
+            <tr>
+                <td><?=$customer->id?></td>
+                <td><?=$customer->strFirstName?></td>
+                <td><?=$customer->strLastName?></td>
+                <td><?=$customer->strEmail?></td>
+                <td><?=$customer->strPhoneNumber?></td>
+            </tr>
+        </table>
+        <?php
+        }
+        ?>
+    </div>
+
+    <a class="cta" href="index.php?controller=admin&action=customerList">Go back customer list</a>
+</div><!-- .customer / customer.php -->
