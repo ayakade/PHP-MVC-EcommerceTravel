@@ -8,6 +8,7 @@ include("models/Types.php");
 include("models/Users.php");
 include("models/Employees.php");
 include("models/Accomodations.php");
+include("models/Bookings.php");
 
 include("libs/DB.php");
 include("libs/Errors.php");
