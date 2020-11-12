@@ -9,8 +9,8 @@
         <div id="flyoutMenu">
         <?php
             $arrMenu = array(
-                array('menu'=>'City', 'link'=>'#'),
-                array('menu'=>'Type', 'link'=>'#'),
+                // array('menu'=>'City', 'link'=>'#'),
+                // array('menu'=>'Type', 'link'=>'#'),
                 array('menu'=>'Login', 'link'=>'index.php?controller=public&action=memberLogin')
             );
            
