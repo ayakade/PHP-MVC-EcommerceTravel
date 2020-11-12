@@ -22,6 +22,14 @@ p {
 	font-size: 14px;
 }
 
+.cta-secondary {
+	border: none;
+	padding: 10px 20px;
+	background: #6DA4A9;
+	color: #fff;
+	border-radius: 10px;
+}
+
 /* MOBILE */
 
 .col-1 { width: 8.33%; }
@@ -70,7 +78,7 @@ html, body {
 }
 
 #flyoutMenu {
-	background:#0c96a3;
+	background:#6DA4A9;
 	text-align: center; 
 	width: 100%; 
 	height: 100vh;
@@ -122,7 +130,7 @@ nav {
 /* header */
 
 .header {
-	background: #0c96a3;
+	background: #6DA4A9;
 	height: 80px;
 	display: flex;
 	justify-content: space-between;
@@ -138,10 +146,14 @@ nav {
 
 .footer {
     flex-shrink: 0;
-    background: #0c96a3;
+    background: #6DA4A9;
     color: #fff;
     text-align: center;
     padding: 50px;
+}
+
+.footer a {
+	color: #fff;
 }
 
 .footer .menu {
@@ -160,44 +172,108 @@ nav {
     padding: 0 40px;
 }
 
+/* login, signup */
+
+.form {
+	margin: 50px auto;
+}
+
+.form h2 {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.form form {
+	margin-bottom: 30px;
+}
+
+.form .fieldgroup {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.form .fieldgroup label {
+	margin-bottom: 5px;
+}
+
+.form .fieldgroup input {
+	border: #6DA4A9 1.5px solid;
+	padding: 10px 5px;
+	border-radius: 5px;
+}
+
+.form .btn {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.form p {
+	text-align: center;
+}
+
+/* error */
+
+.form .error {
+	color: #E1AC71;
+	margin-bottom: 10px;
+}
+
+#signup .errorpopup { 
+	opacity: 0; 
+	transition: opacity .5s linear; 
+	color: #E1AC71;
+}
+
+#signup .error .errorpopup {
+	opacity: 1;
+}
+
+#signup .error input {
+	border: 2px solid #E1AC71;
+}
+
+
 /* heroTop */
 
- .hero {
-    display: flex;
-    flex-direction: column;
- }
+.hero {
+display: flex;
+flex-direction: column;
+}
 
- .heroImage {
-    padding: 200px 0;
-    background:#000;
- }
+.heroImage {
+padding: 200px 0;
+background:#000;
+}
 
- .hero .title {
-     margin: 50px 0;
-     padding: 0 50px;
- }
+.hero .title {
+	margin: 50px 0;
+	padding: 0 50px;
+}
 
- /* city-reccomend */
+/* city-reccomend */
 
- .city-recommend,  .accommodation-type
- {
-     text-align: center;
-     margin-bottom: 50px;
- }
+.city-recommend,  .accommodation-type
+{
+	text-align: center;
+	margin-bottom: 50px;
+}
 
- .city-recommend h3, .accommodation-type h3 {
-     margin-bottom: 30px;
- }
+.city-recommend h3, .accommodation-type h3 {
+	margin-bottom: 30px;
+}
 
- .city-recommend .cityList, .accommodation-type .typeList {
-     display: flex;
-     flex-wrap: wrap;
-     justify-content: space-around;
- }
+.city-recommend .cityList, .accommodation-type .typeList {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
 
- .city-recommend .cityList .city, .accommodation-type .typeList .type {
-     margin-bottom: 30px;
- }
+.city-recommend .cityList .city, .accommodation-type .typeList .type {
+	margin-bottom: 30px;
+}
 
 /* DESKTOP */
 
