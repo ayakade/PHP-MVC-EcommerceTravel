@@ -2,6 +2,10 @@
 
 Class UserController extends Controller {
 
+	var $content = "";
+	var $title = "Your";
+	var $controller = "user";
+
 	// user login
 	public function doLogIn()
 	{
@@ -103,10 +107,10 @@ Class UserController extends Controller {
 		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
 
 		$this->loadData(Bookings::getUpcomingBookings($_SESSION["userId"]), "oBookings"); 
-		$this->loadView("views/user-upcoming-bookings.php", 1, "upcomingHTML"); 
+		$this->loadView("views/upcoming-bookings.php", 1, "upcomingHTML"); 
 
 		$this->loadData(Bookings::getPastBookings($_SESSION["userId"]), "oBookings"); 
-		$this->loadView("views/user-past-bookings.php", 1, "pastHTML"); 
+		$this->loadView("views/past-bookings.php", 1, "pastHTML"); 
 
 		$this->loadView("views/bookings.php", 1, "contentHTML"); 
 		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
