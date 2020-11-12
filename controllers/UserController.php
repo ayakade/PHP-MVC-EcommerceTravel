@@ -53,23 +53,37 @@ Class UserController extends Controller {
 		}
 	}
 
-	// signup page
-	public function signup() 
-	{
-		$this->loadRoute("Global", "header", "headerHTML"); // load header
-		$this->loadRoute("Global", "footer", "footerHTML"); // load footer
-		
-		$this->loadView("views/signup.php", 1, "contentHTML"); 
-
-        $this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
-
-		$this->loadLastView("views/main-user.php"); // final view
-	}
-
 	// new user sign up
 	public function doSignup()
 	{
-		
+		// insert to db
+		$con = DB::connect();
+		$sql = "INSERT INTO users (strFirstName, strLastName, strEmail, strPassword) values ('".$_POST["strFirstName"]."', '".$_POST["strLastName"]."','".$_POST["strEmail"]."','".$_POST["strPassword"]."')";
+
+		mysqli_query($con, $sql);
+
+		$this->go("user", "userMain");
+
+		// after resgister get the new ID
+		// $lastID = mysqli_insert_id($con);
+		// // echo "last ID: ".$lastID;
+		// // die;
+		// $_SESSION["userId"] = $lastID;
+
+		// return true;
+
+		// // get user info with user ID
+		// $user = Users::getUserInfo($lastID);
+
+		// if ($user)
+		// {
+		// 	$this->go("user", "userMain");
+			
+		// } else {
+		// 	// if unsucseful 
+		// 	// echo "unsucseful";
+		// 	$this->go("public", "signup"); 
+		// }
 	}
 
 	// user main page after login 
