@@ -1,4 +1,4 @@
-<div class="customer col-12 col-lg-12">
+<div class="customer col-12">
 
     <div class="info">
         <?php	
@@ -25,7 +25,9 @@
         <?php
         }
         ?>
-    </div>
+    </div><!-- .info -->
 
-    <a class="cta" href="index.php?controller=admin&action=customerList">Go back customer list</a>
+
+        <a class="cta" href="index.php?controller=admin&action=customerList">Go back customer list</a>
+
 </div><!-- .customer / customer.php -->
