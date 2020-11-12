@@ -123,7 +123,7 @@ nav {
 	padding: 0 30px;
 }
 
-.account, .bookingList {
+.account, .bookingList, .booking-info {
 	margin: 50px auto;
 	padding: 0 30px;
 }
