@@ -279,6 +279,63 @@ input[type="submit"] {
 	margin-bottom: 30px;
 }
 
+/* accommodation list */
+
+.accommodationList .row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.accommodationList .row .cta {
+	padding: 10px 15px;
+}
+
+.accommodationList .lists .list {
+	margin-bottom: 10px;
+}
+
+/* accommodation */
+
+.accommodation-info h2 {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.accommodation-info .info {
+	text-align: center;
+}
+
+.accommodation-info .info .fieldgroup {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+.accommodation-info .info .fieldgroup label {
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.accommodation-info .info .fieldgroup input[type="text"], .accommodation-info .info .fieldgroup textarea {
+	padding: 10px;
+	border: #044b6b 1px solid;
+	border-radius: 10px;
+}
+
+.accommodation-info .info .fieldgroup textarea {
+	height: 200px;
+}
+
+.accommodation-info .info .fieldgroup img {
+	width: 300px;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+
+
 /* DESKTOP */
 
 @media only screen and (min-width: 700px) {
@@ -407,11 +464,11 @@ input[type="submit"] {
 
 	.bookingList {
 		width: 1000px;
-		margin: 0 auto;
 	}
 
 	.bookingList h3 {
 		margin-bottom: 50px;
+		text-align: left;
 	}
 
 	.bookingList .row {
@@ -424,14 +481,35 @@ input[type="submit"] {
 
 	/* booking */
 
+	.booking-info {
+		width: 1000px;
+		text-align: left;
+	}
+
 	.booking-info .booking h3 {
 		margin-bottom: 50px;
+		text-align: left;
 	}
 
 	.booking-info .booking .row {
 		display: flex;
 		width: 750px;
-		margin: 0 auto;
 		margin-bottom: 50px;
+	}
+
+	/* accommodation list */
+
+	.accommodationList {
+		width: 800px;
+	}
+
+	/* accommodation */
+
+	.accommodation-info {
+		width: 700px;
+	}
+
+	.accommodation-info .info .fieldgroup input[type="text"] {
+		width: 300px;
 	}
 }
