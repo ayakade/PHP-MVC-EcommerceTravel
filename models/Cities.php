@@ -5,7 +5,8 @@ Class Cities {
     public function __construct($data)
 	{
 		$this->id = $data["id"];
-		$this->strName = $data["strName"];
+        $this->strName = $data["strName"];
+        $this->strImage = $data["strImage"];
 	}	
 	
 	// get cities
@@ -26,10 +27,10 @@ Class Cities {
         return $cityArray;
     }
     
-    // get randam 4 cities 
+    // get randam 6 cities 
 	public static function getRandCities()
 	{
-		$cities = DB::query("SELECT * FROM cities ORDER BY RAND() LIMIT 4"); 
+		$cities = DB::query("SELECT * FROM cities ORDER BY RAND() LIMIT 6"); 
 
         // acting as a factory
        $cityArray = array(); // set default (empty)
