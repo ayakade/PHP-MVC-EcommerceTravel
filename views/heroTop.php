@@ -1,5 +1,8 @@
 <div class="hero">
-    <div class="heroImage"></div>
+    <div class="filter">
+        <div class="heroImage"></div>
+    </div><!-- .filter -->
+
     <div class="search">
         <h2>Your next trip</h2>
 
@@ -9,7 +12,7 @@
 
             <div class="fieldgroup">
                 <label>Location</label>
-                <input type="text" name="" value="">
+                <input type="text" name="" value="" placeholder="location">
             </div><!-- end of fieldgroup -->
 
             <div class="fieldgroup">
@@ -24,10 +27,10 @@
 
             <div class="fieldgroup">
                 <label>Guests</label>
-                <input type="text" name="" value="">
+                <input type="text" name="" value="" placeholder="guest">
             </div><!-- end of fieldgroup -->
 
-            <input type="submit" value="Find">
+            <input class="cta" type="submit" value="Search">
             
         </form>
     </div><!-- .search -->
