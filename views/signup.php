@@ -39,7 +39,7 @@
         <div class="btn"><input class="cta-secondary" type="submit" value="Sign up"></div>
     </form>
 
-    <p>Have an account now? <a href="index.php?controller=user&action=login"><strong>Login Now</strong></a></p>
+    <p>Have an account now? <a href="index.php?controller=public&action=memberLogin"><strong>Login Now</strong></a></p>
 
 </div><!-- .signup / signup.php -->
 
