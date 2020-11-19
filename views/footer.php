@@ -21,7 +21,7 @@
         <div class="menu col-12 col-lg-4">
             <p>570 Dunsmuir St #600<br>Vancouver, BC V6B 1Y1</p>
             <p>111-111-1111</p>
-            <p>indo@aroundtheworld.com</p>
+            <p>info@aroundtheworld.com</p>
             <div class="sns row">
                 <a href="#"><i class="fab fa-facebook-square"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
