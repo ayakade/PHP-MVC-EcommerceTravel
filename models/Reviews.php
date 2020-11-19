@@ -49,11 +49,6 @@ Class Reviews {
         // return the list of objects
         return $reviewArray;
     }
-
-    // write a new review 
-    public function writeReview() {
-       
-    }
 }
 
 ?>
