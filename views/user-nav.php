@@ -23,7 +23,11 @@
             }
         ?>
 		</div><!-- end of flyout menu -->
-	</div><!-- end of burger menu -->
+    </div><!-- end of burger menu -->
+    
+    <div class="logo">
+        <a href="index.php"><h1>Around The World</h1></a>
+    </div><!-- .logo -->
 
 	<nav>
     <?php
