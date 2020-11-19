@@ -11,7 +11,7 @@
         <?php
             $arrMenu = array(
                 array('menu'=>'Home', 'link'=>'index.php?controller=admin&action=adminMain', 'icon'=>''),
-                array('menu'=>'Accommodation', 'link'=>'index.php?controller=admin&action=accomodationList', 'icon'=>''),
+                array('menu'=>'Accommodation', 'link'=>'index.php?controller=admin&action=accommodationList', 'icon'=>''),
                 array('menu'=>'Booking', 'link'=>'index.php?controller=admin&action=bookingList', 'icon'=>''),
                 array('menu'=>'Customers', 'link'=>'index.php?controller=admin&action=customerList', 'icon'=>''),
                 array('menu'=>'Logout', 'link'=>'index.php?controller=admin&action=doLogOut', 'icon'=>'')
