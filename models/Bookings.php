@@ -7,6 +7,7 @@ Class Bookings {
 		$this->id = $data["id"];
         $this->userId = $data["userId"];
         $this->name = $data["name"];
+        $this->accommodationId = $data["accommodationId"];
 		$this->accommodation = $data["accommodation"];
 		$this->image = $data["image"];
 		$this->checkin = $data["checkin"];
@@ -27,7 +28,7 @@ Class Bookings {
     // get all booking info 
     public static function getAll()
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
@@ -50,7 +51,7 @@ Class Bookings {
     // user page: get their upcoming bookings  
     public static function getUpcomingBookings($userId)
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
@@ -84,7 +85,7 @@ Class Bookings {
     // user page: get their past bookings  
     public static function getPastBookings($userId)
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
@@ -117,7 +118,7 @@ Class Bookings {
     // admin page: get all upcoming bookings  
     public static function getAllUpcomingBookings()
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
@@ -151,7 +152,7 @@ Class Bookings {
     // admin page: get all past bookings  
     public static function getAllPastBookings()
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
@@ -181,11 +182,10 @@ Class Bookings {
         }
     }
 
-
     // get specific booking info 
     public static function getBookingInfo($id)
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
@@ -204,5 +204,27 @@ Class Bookings {
 
         // return the list of objects
         return $bookingArray;
+    }
+
+    // get booking info matches boooking number
+	public static function search($id)
+	{
+		$arrBooking = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, status
+        FROM bookings
+        LEFT JOIN users ON bookings.userId = users.id
+        LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
+        LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN discounts ON bookings.discountId = discounts.id
+        WHERE bookings.id='".$id."'");
+
+		// print_r($arrUser);
+
+		if($arrBooking)
+		{
+			return $arrBooking[0]["id"];
+		} else {
+			return false;
+		}
     }
 }
