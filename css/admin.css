@@ -179,6 +179,28 @@ input[type="submit"] {
     padding: 0 40px;
 }
 
+/* home/search */
+
+.search h1 {
+	margin-bottom: 20px;
+}
+
+.search .fieldgroup {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+.search .fieldgroup label {
+	margin-bottom: 10px;
+}
+
+.search .fieldgroup input {
+	padding: 10px 5px;
+	border: #044b6b 1px solid;
+	border-radius: 10px;
+}
+
 /* customer list */
 
 .customerList h1 {
@@ -430,7 +452,13 @@ input[type="submit"] {
     .container {
 		margin-left: 300px;
 		padding: 50px;
-    }
+	}
+	
+	/* search/home */
+
+	.search .fieldgroup input {
+		width: 250px;
+	}
     
 	/* customer */
 	
