@@ -31,8 +31,8 @@ Class UserController extends Controller {
 				// check if password matches
 				if (password_verify($user->strPassword, $passwordHash)) 
 				{
-					// go to user main page if match
-					$this->go("user", "userMain"); 
+					// go to user main page (booking list page) if match
+					$this->go("user", "bookingList"); 
 
 				} else {
 					$this->go("public", "mError"); 
@@ -125,6 +125,33 @@ Class UserController extends Controller {
 
 		$this->loadData(Bookings::getBookingInfo($_GET["bId"]), "oBookings"); 
 		$this->loadView("views/user-booking.php", 1, "contentHTML"); 
+		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-user.php"); // final view
+	}
+
+	// write a review 
+	public function writeReview() {
+		if($_POST["rates"] && $_POST["comments"])
+		{
+			$con = DB::connect();
+			$sql = "INSERT INTO reviews(accommodationId, rates, comments, userId) values ('".$_POST["accommodationId"]."', '".$_POST["rates"]."','".$_POST["comments"]."', '".$_POST["userId"]."')";
+		
+			mysqli_query($con, $sql);
+
+			// if successed 
+			$this->go("user", "success"); 
+		} else {
+			// if unsucsseful
+			echo "unsucsseful";
+		}
+	}
+
+	// thank you page after writing review 
+	public function success() {
+		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
+
+		$this->loadView("views/user-review-success.php", 1, "contentHTML"); 
 		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-user.php"); // final view
