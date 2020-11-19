@@ -24,7 +24,7 @@
     </div><!-- .burger menu -->
 
     <div class="logo">
-        <a href="index.php"><h1>##</h1></a>
+        <a href="index.php"><h1>Around The World</h1></a>
     </div><!-- .logo -->
 
     <nav>
