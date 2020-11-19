@@ -22,6 +22,14 @@ p {
 	font-size: 14px;
 }
 
+.cta {
+	border: none;
+	padding: 10px 20px;
+	background: #E1AC71;
+	color: #fff;
+	border-radius: 10px;
+}
+
 .cta-secondary {
 	border: none;
 	padding: 10px 20px;
@@ -139,7 +147,20 @@ nav {
 }
 
 .logo {
-	display: none;
+	z-index: 10;
+}
+
+.logo h1{
+	background: url("../imgs/logo-white.png");
+	background-size: cover;
+	width: 60px;
+	height: 70px;
+	text-indent: -9999px;
+}
+
+.logo h1 a {
+	background-image: url("../imgs/logo-white.png");
+	background-size: cover;
 }
 
 /* footer */
@@ -150,6 +171,11 @@ nav {
     color: #fff;
     text-align: center;
     padding: 50px;
+}
+
+.footer .copyright {
+	font-weight: 100;
+	font-size: 10px;
 }
 
 .footer a {
@@ -165,12 +191,162 @@ nav {
     flex-direction: column;
 }
 
+.footer .menu p {
+	padding-bottom: 5px;
+}
+
+.footer .menu .sns {
+	margin-top: 10px;
+}
+
 /* container */
 
 .container {
     flex: 1 0 auto;
     padding: 0 40px;
 }
+
+/* heroTop */
+
+.hero {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	margin-bottom: 50px;
+}
+
+.filter {
+	background-color: #F7E4BC;
+}
+
+.hero .heroImage {
+	padding: 200px 0;
+	background: url("../imgs/hero-top.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	opacity: 70%;
+}
+
+.hero .search {
+	padding: 20px 50px;
+	border-radius: 10px;
+	position: absolute;
+	top: 200px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	background: rgba(255, 255, 255, 0.8);
+	text-align: center;
+}
+
+.hero .search h2 {
+	margin-bottom: 10px;
+}
+
+.hero .search .fieldgroup {
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.hero .search .fieldgroup input {
+	padding: 5px 10px;
+	border-radius: 10px;
+	border: 1px #3B7197 solid;
+	margin-top: 5px;
+	height: 30px;
+}
+
+.hero .search .cta {
+	height: 30px;
+	padding: 5px 20px;
+}
+
+/* city-reccomend */
+
+.city-recommend,  .accommodation-type, .accommodation-recommend {
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.city-recommend h3, .accommodation-type h3, .accommodation-recommend h3 {
+	margin-bottom: 30px;
+}
+
+.city-recommend .cityList, .accommodation-type .typeList {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.city-recommend .cityList .city, .accommodation-type .typeList .type {
+	margin-bottom: 30px;
+}
+
+.city-recommend .cityList .city img {
+	width: 150px;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+/* city , type */
+
+.city-accommodation, .type-accommodation {
+	margin: 50px 0;
+	text-align: center;
+}
+
+.city-accommodation h2, .type-accommodation h2 {
+	margin-bottom: 30px;
+}
+
+.city-accommodation .accommodations .accommodation, .type-accommodation .accommodations .accommodation {
+	width: 300px;
+	margin: 0 auto;
+	padding: 40px 0;
+	border: #044b6b 1px solid;
+	border-radius: 30px;
+}
+
+.city-accommodation .accommodations .accommodation img, .type-accommodation .accommodations .accommodation img {
+	width: 200px;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+.city-accommodation .accommodations .accommodation .cta, .type-accommodation .accommodations .accommodation .cta {
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 200px;
+}
+
+
+
+/* types */
+
+.accommodation-type .typeList .type img {
+	width: 200px;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+/* accommodation recomend */
+
+.accommodation-recommend .accommodationList .accommodation {
+	margin-bottom: 30px;
+}
+
+.accommodation-recommend .accommodationList .accommodation img {
+	width: 250px;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+.accommodation-recommend .accommodationList .accommodation p {
+	margin-bottom: 5px;
+}
+
 
 /* login, signup */
 
@@ -233,46 +409,6 @@ nav {
 
 #signup .error input {
 	border: 2px solid #E1AC71;
-}
-
-
-/* heroTop */
-
-.hero {
-display: flex;
-flex-direction: column;
-}
-
-.heroImage {
-padding: 200px 0;
-background:#000;
-}
-
-.hero .title {
-	margin: 50px 0;
-	padding: 0 50px;
-}
-
-/* city-reccomend */
-
-.city-recommend,  .accommodation-type
-{
-	text-align: center;
-	margin-bottom: 50px;
-}
-
-.city-recommend h3, .accommodation-type h3 {
-	margin-bottom: 30px;
-}
-
-.city-recommend .cityList, .accommodation-type .typeList {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-}
-
-.city-recommend .cityList .city, .accommodation-type .typeList .type {
-	margin-bottom: 30px;
 }
 
 /* DESKTOP */
@@ -338,46 +474,150 @@ background:#000;
 	/* header */
 
 	.header {
-		height: 120px;
+		height: 100px;
 		padding: 20px 100px;
 		position: fixed;
 		top: 0;
 		z-index: 999;
 	}
 
-	.logo {
-		display: flex;
-		z-index: 10;
+	.logo h1 {
+		width: 80px;
+		height: 90px;
 	}
 
-	.logo h1{
-		background: url("#");
-		background-size: cover;
-		width: 130px;
-		height: 50px;
-		text-indent: -9999px;
-	}
-
-	.logo h1 a {
-		background-image: url("#");
-		background-size: cover;
-    }
-    
     /* footer */
 
     .footer {
+		margin: 0 auto;
         padding: 50px 100px;
-    }
+	}
 
     .footer .row {
         display: flex;
-        justify-content: space-between;
-        margin-bottom: 30px;
-    }
+		justify-content: space-between;
+		margin-bottom: 15px;
+	}
 
-    /* contaner */
+	.footer .row .menu {
+		text-align: left;
+	}
+
+	.footer .row .menu .submenu {
+		margin-top: 10px;
+	}
+
+	.footer .row .menu .submenu a {
+		margin-bottom: 10px;
+	}
+
+	.footer .row .menu .sns {
+		justify-content: flex-start;
+	}
+
+	.footer .row .menu .sns a {
+		margin-right: 20px;
+		font-size: 30px;
+	}
+	
+	/* heroTop */
+
+	.hero {
+		margin: 0;
+		margin-top: 100px;
+	}
+
+	.hero .search {
+		padding: 40px 30px;
+	}
+
+	.hero .search form {
+		display: flex;
+		align-items: flex-end;
+	}
+
+	.hero .search .fieldgroup {
+		margin: 0;
+		margin-right: 10px;
+	}
+
+	/* contaner */
+	
     .container {
-		margin-top: 120px;
-        padding: 0 100px;
-    }
+		padding: 0 100px;
+		text-align: center;
+		margin-top: 100px;
+	}
+	
+	/* city recommendation */
+
+	.city-recommend, .accommodation-type, .accommodation-recommend {
+		margin: 0 auto;
+		margin-bottom: 100px;
+	}
+
+	.city-recommend h3, .accommodation-type h3, .accommodation-recommend h3 {
+		margin-bottom: 50px;
+	}
+
+	.city-recommend, .accommodation-type {
+		width: 1100px;
+	}
+
+	.city-recommend .cityList .city a {
+		display: flex;
+		align-items: center;
+	}
+
+	.city-recommend .cityList .city img {
+		margin: 0;
+		margin-right: 30px;
+	}
+
+	/* city, type */
+
+	.city-accommodation .accommodations .accommodation, .type-accommodation .accommodations .accommodation {
+		margin: 0 auto;
+		width: 650px;
+		padding: 40px;
+		text-align: left;
+	}
+
+	.city-accommodation .accommodations .accommodation a, .type-accommodation .accommodations .accommodation a {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.city-accommodation .accommodations .accommodation img, .type-accommodation .accommodations .accommodation img {
+		margin: 0;
+	}
+
+	.city-accommodation .accommodations .accommodation .title, .type-accommodation .accommodations .accommodation .title {
+		width: 300px;
+	}
+
+	.city-accommodation .accommodations .accommodation .cta, .type-accommodation .accommodations .accommodation .cta {
+		text-align: center;
+		margin: 0;
+		margin-top: 20px;
+	}
+
+	/* types */
+
+	.accommodation-type .typeList .type img {
+		width: 300px;
+	}
+
+	/* accommodation-reccomend */
+
+	.accommodation-recommend {
+		width: 1300px;
+	}
+
+	.accommodation-recommend .accommodationList {
+		display: flex;
+	}
+
+	/* login, signup */
 }
