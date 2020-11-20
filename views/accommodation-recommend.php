@@ -6,7 +6,7 @@
         {
         ?>
             <div class="accommodation col-12 col-lg-3">
-                <a href="index.php?controller=public&action=accommodation">
+                <a href="index.php?controller=public&action=accommodation&aId=<?=$accommodation->id?>">
                     <img src="assets/<?=$accommodation->image?>" alt="<?=$accommodation->strName?>">
                     <h4><?=$accommodation->strName?></h4>
                     <p><?=$accommodation->city?>, <?=$accommodation->country?></p>
