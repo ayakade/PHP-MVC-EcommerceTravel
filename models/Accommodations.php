@@ -29,7 +29,7 @@ Class Accommodations {
     $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image 
     FROM accommodations
     LEFT JOIN cities ON cities.id = accommodations.cityId
-    LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accomodationImageId
+    LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
     LEFT JOIN countries ON countries.id = cities.countryId"); 
     // $accommodations = DB::query("SELECT accommodations.id AS id, types.id AS typeID, types.strName AS type, accommodations.strName, strDescription, maxGuestNumber, price, cities.strName AS cityName, countries.strName AS strCountry, accommodationImages.strFirstImage AS image 
     // FROM accommodationTypes
@@ -69,7 +69,7 @@ Class Accommodations {
     $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image 
     FROM accommodations
     LEFT JOIN cities ON cities.id = accommodations.cityId
-    LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accomodationImageId
+    LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
     LEFT JOIN countries ON countries.id = cities.countryId
     WHERE accommodations.id = ".$id.""); 
     // $accommodations = DB::query("SELECT accommodations.id AS id, types.id AS typeID, types.strName AS type, accommodations.strName, strDescription, maxGuestNumber, price, cities.strName AS cityName, countries.strName AS strCountry, accommodationImages.strFirstImage AS image 
@@ -101,7 +101,7 @@ Class Accommodations {
 		$accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image 
     FROM accommodations
     LEFT JOIN cities ON cities.id = accommodations.cityId
-    LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accomodationImageId
+    LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
     LEFT JOIN countries ON countries.id = cities.countryId
     ORDER BY RAND() LIMIT 4"); 
 
@@ -123,7 +123,7 @@ Class Accommodations {
     $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image 
     FROM accommodations
     LEFT JOIN cities ON cities.id = accommodations.cityId
-    LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accomodationImageId
+    LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
     LEFT JOIN countries ON countries.id = cities.countryId
     WHERE cityId = ".$id.""); 
     
