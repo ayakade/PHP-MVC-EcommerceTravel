@@ -20,7 +20,7 @@ Class Cities {
         foreach($cities as $city)
         {
             // create an instance / object for this SPECIFIC city
-            $cityArray[] = new City($city); // put this city object onto the array
+            $cityArray[] = new Cities($city); // put this city object onto the array
         }
        
         // return the list of city objects
