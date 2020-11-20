@@ -13,7 +13,7 @@ Class Reviews {
     }
 
     // get all reviews of one accommodation
-    public function getReviews($id) {
+    public static function getReviews($id) {
         $reviews = DB::query("SELECT reviews.id AS id, accommodationId, rates, comments, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name
         FROM reviews
         LEFT JOIN users ON users.id = reviews.userId
@@ -32,7 +32,7 @@ Class Reviews {
     }
 
     // get a specific  accommodation
-    public function getReview($id) {
+    public static function getReview($id) {
         $reviews = DB::query("SELECT reviews.id AS id, accommodationId, rates, comments, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name
         FROM reviews
         LEFT JOIN users ON users.id = reviews.userId
