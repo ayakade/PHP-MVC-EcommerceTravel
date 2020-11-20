@@ -60,14 +60,14 @@ Class AdminController extends Controller {
 	{
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
-        $this->loadView("views/admin-main.php", 1, "contentHTML"); 
+        $this->loadView("views/admin-search.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-admin.php"); // final view
 	}
 	
 	// accomodation list
-	public function accomodationList() 
+	public function accommodationList() 
 	{
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
@@ -83,7 +83,7 @@ Class AdminController extends Controller {
 	{
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
-		$this->loadData(Accommodations::getAccommodation(), "oAccommodations");
+		$this->loadData(Accommodations::getAccommodation($_GET["aId"]), "oAccommodations");
         $this->loadView("views/admin-accommodation.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
@@ -95,33 +95,169 @@ Class AdminController extends Controller {
 	{
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
+		$this->loadData(Cities::getAllCities(), "oCities");
+		$this->loadData(Types::getAllType(), "oTypes");
         $this->loadView("views/admin-new-accommodation.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-admin.php"); // final view
 	}
 	
-	// save new accomodation info
-	public function saveAccomodation()
+	// save a new accomodation info
+	public function saveAccommodation()
 	{
-		if($_POST["strName"] && $_POST["strDescription"] && $_POST["image"] && $_POST["alt"])
+		// if all required field is filled
+        if($_POST["strName"] && $_POST["city"] && $_POST["price"] && $_POST["maxGuestNumber"] && $_POST["type"] && $_POST["strDescription"] && $_FILES["image"])
 		{
-			//upload photo 
-			$profilePhotoName = $_FILES[$fileFieldName]["name"]; // photo name
+            //reference: https://www.codeandcourse.com/how-to-upload-image-in-php-and-store-in-folder-and-database/
+            // file upload path
+            $targetDir = "assets/";
+            // create unique file name
+            $timestamp =round(microtime(true) * 1000);
+            $fileName = $timestamp.basename($_FILES['image']['name']);
+            $targetFilePath = $targetDir . $fileName;
 
-			move_uploaded_file($_FILES[$fileFieldName]["tmp_name"], "assets/".$_FILES[$fileFieldName]["name"]);
+            // check the extension of the uploaded file
+            $fileType = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+            
+            //allowed file types
+            $allowTypes = array('png', 'jpg', 'jpeg');
 
-			$con = DB::connect();
-			$sql = "INSERT INTO accommodations(strName, strDescription) values ('".$_POST["strName"]."', '".$_POST["strDescription"]."')";
-		
-			mysqli_query($con, $sql);
+            if (!file_exists($targetFilePath)) 
+            {
+                if(in_array($fileType, $allowTypes))
+                {
+                    // Upload file to server
+                    if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath))
+                    {
+                        // insert to db
+						$con = DB::connect();
+						// insert basic data
+                        $sql = "INSERT INTO accommodations (strName, cityId, strDescription, maxGuestNumber, price) 
+								VALUES ('".$_POST["strName"]."', '".$_POST["city"]."','".$_POST["strDescription"]."','".$_POST["maxGuestNumber"]."','".$_POST["price"]."')";
+						mysqli_query($con, $sql);
+						// after insert basic data get the new ID
+						$lastID = mysqli_insert_id($con);
 
-			// if successed new assignment
-			$this->go("admin", "accomodationList"); 
+						// insert type data
+						foreach($_POST["type"] as $type)
+						{
+							$sql = "INSERT INTO accommodationTypes (typeId, accommodationId)  
+							VALUES ('".$type."', '".$lastID."')";
+							mysqli_query($con, $sql);
+						}
+
+						// insert image data
+						$sql = "INSERT INTO accommodationImages (accommodationId, strFirstImage) 
+								VALUES ('".$lastID."', '".$fileName."')";
+						mysqli_query($con, $sql);
+						// after insert basic data get the new ID
+						$lastImageID = mysqli_insert_id($con);
+						// echo $lastImageID;
+
+						// add accommocationImageId to table accommodations
+						$sql = "UPDATE accommodations
+								SET accommodationImageId = '".$lastImageID."'
+								WHERE id = '".$lastID."'";
+						mysqli_query($con, $sql);
+
+                        // if successed go to accommodation list page
+                        $this->go("admin", "accommodationList"); 
+                    }
+                }
+            }  
 		} else {
-			// if unsuccessful
-			echo "unsuccessful";
+            // if unsucseful 
+            echo "unsucseful";
 		}
+	}
+
+	// update accommodation info
+
+	public function update() {
+		// if all required field is filled
+        if($_POST["strName"] && $_POST["city"] && $_POST["price"] && $_POST["maxGuestNumber"] && $_POST["type"] && $_POST["strDescription"] && $_FILES["image"])
+		{
+            //reference: https://www.codeandcourse.com/how-to-upload-image-in-php-and-store-in-folder-and-database/
+            // file upload path
+            $targetDir = "assets/";
+            // create unique file name
+            $timestamp =round(microtime(true) * 1000);
+            $fileName = $timestamp.basename($_FILES['image']['name']);
+            $targetFilePath = $targetDir . $fileName;
+
+            // check the extension of the uploaded file
+            $fileType = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+            
+            //allowed file types
+            $allowTypes = array('png', 'jpg', 'jpeg');
+
+            if (!file_exists($targetFilePath)) 
+            {
+                if(in_array($fileType, $allowTypes))
+                {
+                    // Upload file to server
+                    if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath))
+                    {
+						$con = DB::connect();
+						// update basic data
+                        $sql = "UPDATE accommodations 
+								SET strName = '".$_POST["strName"]."', cityId = '".$_POST["city"]."', strDescription = '".$_POST["strDescription"]."', maxGuestNumber = '".$_POST["maxGuestNumber"]."', price = '".$_POST["price"]."'
+								WHERE id = ) ";
+						mysqli_query($con, $sql);
+
+						// update type data
+						foreach($_POST["type"] as $type)
+						{
+							$sql = "INSERT INTO accommodationTypes (typeId, accommodationId)  
+							VALUES ('".$type."', '".$lastID."')";
+							mysqli_query($con, $sql);
+						}
+
+						// update image data
+						$sql = "INSERT INTO accommodationImages (accommodationId, strFirstImage) 
+								VALUES ('".$lastID."', '".$fileName."')";
+						mysqli_query($con, $sql);
+
+
+						// add accommocationImageId to table accommodations
+						$sql = "UPDATE accommodations
+								SET accommodationImageId = '".$lastImageID."'
+								WHERE id = '".$lastID."'";
+						mysqli_query($con, $sql);
+
+                        // if successed go to accommodation list page
+                        $this->go("admin", "accommodationList"); 
+                    }
+                }
+            }  
+		} else {
+            // if unsucseful 
+            echo "unsucseful";
+		}
+
+	}
+
+	// find a booking with booking # 
+	public function search() {
+		$_SESSION["bId"] = Bookings::search($_POST["id"]);
+
+		if($_SESSION["bId"]) {
+			$this->go("admin", "result"); 
+		} else {
+			echo "no match booking record";
+		}
+	}
+
+	// booking search result page
+	public function result() {
+		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
+
+		$this->loadData(Bookings::getBookingInfo($_SESSION["bId"]), "oBookings"); 
+		$this->loadView("views/admin-booking.php", 1, "contentHTML"); 
+		$this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-admin.php"); // final view
 	}
     
     // customer's booking list
