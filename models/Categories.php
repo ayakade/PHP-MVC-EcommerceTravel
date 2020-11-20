@@ -23,7 +23,7 @@ Class Categories {
         LEFT JOIN types ON accommodationTypes.typeId = types.id
         LEFT JOIN accommodations ON accommodationTypes.accommodationId = accommodations.id
         LEFT JOIN cities ON cities.id = accommodations.cityId
-        LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accomodationImageId
+        LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
         LEFT JOIN countries ON countries.id = cities.countryId
         WHERE typeID = ".$id.""); 
 
