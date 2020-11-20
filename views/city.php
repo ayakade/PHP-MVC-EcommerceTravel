@@ -13,7 +13,7 @@
         {
         ?>
         <div class="accommodation">
-            <a href="index.php?controller=public&action=accommodation">
+            <a href="index.php?controller=public&action=accommodation&aId=<?=$city->id?>">
                 <img src="assets/<?=$city->image?>" alt="<?=$city->strName?>">
                 <div class="title">
                     <h3><?=$city->strName?></h3>
