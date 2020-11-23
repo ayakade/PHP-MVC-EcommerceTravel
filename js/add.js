@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     event.preventDefault();
                 } 
                 
-                var field = fieldGroups[i].querySelector("input, texearea, image");
+                var field = fieldGroups[i].querySelector("input, select, option, texearea, image");
                 console.log(field);
                 var fieldValue = field.value;
 
