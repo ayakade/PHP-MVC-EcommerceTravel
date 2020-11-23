@@ -130,7 +130,7 @@ nav {
 	padding: 0 30px;
 }
 
-.account, .bookingList, .booking-info {
+.account, .bookingList, .booking-info, .success {
 	margin: 50px auto;
 	padding: 0 30px;
 }
@@ -254,6 +254,16 @@ nav {
 
 .reviews .cta {
 	border: none;
+}
+
+/* review success */
+
+.success {
+	text-align: center;
+}
+
+.success .title {
+	margin-bottom: 30px;
 }
 
 /* account */

@@ -318,7 +318,19 @@ input[type="submit"] {
 	margin-bottom: 10px;
 }
 
-/* accommodation */
+.accommodationList .lists .list a {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.accommodationList .lists .list a .cta {
+	padding: 10px;
+	width: 70px;
+	text-align: center;
+}
+
+/* add new accommodation */
 
 .accommodation-info h2 {
 	text-align: center;
@@ -340,7 +352,7 @@ input[type="submit"] {
 	margin-bottom: 10px;
 }
 
-.accommodation-info .info .fieldgroup input[type="text"], .accommodation-info .info .fieldgroup textarea {
+.accommodation-info .info .fieldgroup input[type="text"], .accommodation-info .info .fieldgroup select, .accommodation-info .info .fieldgroup textarea {
 	padding: 10px;
 	border: #044b6b 1px solid;
 	border-radius: 10px;
@@ -350,13 +362,46 @@ input[type="submit"] {
 	height: 200px;
 }
 
+.accommodation-info .info .fieldgroup .checkbox {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.accommodation-info .info .fieldgroup .checkbox input[type="checkbox"] {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	/* border: #044b6b 2px solid;
+	border-radius: 5px; */
+}
+
 .accommodation-info .info .fieldgroup img {
 	width: 300px;
 	height: auto;
 	margin-bottom: 10px;
 }
 
+/* error */
 
+.error {
+	color: #E1AC71;
+	margin-bottom: 10px;
+}
+
+.errorpopup { 
+	opacity: 0; 
+	transition: opacity .5s linear; 
+	color: #E1AC71;
+}
+
+.error .errorpopup {
+	opacity: 1;
+}
+
+.error input {
+	border: 2px solid #E1AC71;
+}
 
 /* DESKTOP */
 
@@ -456,6 +501,15 @@ input[type="submit"] {
 	
 	/* search/home */
 
+	.adminMain .row {
+		display: flex;
+	}
+
+	.search {
+		width: 400px;
+		margin-right: 100px;
+	}
+
 	.search .fieldgroup input {
 		width: 250px;
 	}
@@ -528,7 +582,11 @@ input[type="submit"] {
 	/* accommodation list */
 
 	.accommodationList {
-		width: 800px;
+		width: 500px;
+	}
+
+	.accommodationList .lists .cta {
+		font-size: 12px;
 	}
 
 	/* accommodation */
@@ -537,7 +595,7 @@ input[type="submit"] {
 		width: 700px;
 	}
 
-	.accommodation-info .info .fieldgroup input[type="text"] {
+	.accommodation-info .info .fieldgroup input[type="text"], .accommodation-info .info .fieldgroup select {
 		width: 300px;
 	}
 }
