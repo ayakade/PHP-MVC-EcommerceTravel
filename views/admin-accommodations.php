@@ -12,6 +12,7 @@
         <div class="list">
             <a href="index.php?controller=admin&action=accommodation&aId=<?=$accommodation->id?>">
             <h3><?=$accommodation->id?>: <?=$accommodation->strName?></h3>
+            <p class="cta">Detail</p>
             </a>
         </div><!-- .list -->
         <?php
