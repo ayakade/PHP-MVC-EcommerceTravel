@@ -28,17 +28,17 @@
             <div class="price">
                 <div class="row">
                     <label>subtotal</label>
-                    <input type="text" id="subtotal" name="subtotal" value="<?=$_SESSION["subtotal"]?>" />
+                    <input type="text" id="subtotal" name="subtotal" value="<?=$this->subtotal?>" />
                 </div><!-- .row -->
 
                 <div class="row">
                     <label>tax</label>
-                    <input type="text" name="tax" value="<?=$_SESSION["tax"]?>" />
+                    <input type="text" name="tax" value="<?=$this->tax?>" />
                 </div><!-- .row -->   
                 
                 <div class="row">
                     <label>total</label>
-                    <input type="text" name="total" value="<?=$_SESSION["total"]?>" />
+                    <input type="text" name="total" value="<?=$this->total?>" />
                 </div><!-- .row -->
             </div><!-- .price -->
         </div><!-- .booking -->
@@ -54,8 +54,8 @@
                     </tr>
 
                     <tr>
-                        <td><?=$_SESSION["checkin"]?>- <?=$_SESSION["checkout"]?><td>
-                        <td><?=$_SESSION["guest"]?></td>
+                        <td><?=$this->checkin?> - <?=$this->checkout?><td>
+                        <td><?=$this->guest?></td>
                     </tr>
                 </table>
             </div><!-- .review -->
