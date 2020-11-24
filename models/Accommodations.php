@@ -15,29 +15,90 @@ Class Accommodations {
     $this->city = $data["city"];
     $this->country = $data["country"];
     $this->image = $data["image"];
+    $this->image2 = $data["image2"];
+    $this->image3 = $data["image3"];
+    $this->image4 = $data["image4"];
+    $this->image5 = $data["image5"];
   }
     
   // find accommodations that match customer's preference
-  public function search()
+  public static function search($location, $guest)
   {
+    $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image, accommodationImages.strSecondImage AS image2, accommodationImages.strThirdImage AS image3, accommodationImages.strFourthImage AS image4, accommodationImages.strFifthImage AS image5
+    FROM accommodations
+    LEFT JOIN cities ON cities.id = accommodations.cityId
+    LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
+    LEFT JOIN countries ON countries.id = cities.countryId
+    WHERE cities.strName = '".$location."' AND maxGuestNumber >= '".$guest."'"); 
 
+    // print_r($accommodations);
+
+    // if there's accomodations match
+    if($accommodations) {
+
+      // echo "found";
+      // acting as a factory
+      $accommodationArray = array(); // set default(empty)
+      foreach($accommodations as $accommodation)
+      {
+        // create an instance / object for this SPECIFIC 
+        $accommodationArray[] = new Accommodations($accommodation); // put this  object onto the array
+      }
+
+      // return the list of objects
+      return $accommodationArray;
+    } else {
+      // echo "no found";
+      return false;
+    }
+  }
+
+  public static function suggest($location)
+  {
+    // $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image, accommodationImages.strSecondImage AS image2, accommodationImages.strThirdImage AS image3, accommodationImages.strFourthImage AS image4, accommodationImages.strFifthImage AS image5
+    // FROM accommodations
+    // LEFT JOIN cities ON cities.id = accommodations.cityId
+    // LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
+    // LEFT JOIN countries ON countries.id = cities.countryId
+    // WHERE cities.strName LIKE '%".$location."%'"); 
+
+    $con = DB::connect();
+    $sql = "SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image, accommodationImages.strSecondImage AS image2, accommodationImages.strThirdImage AS image3, accommodationImages.strFourthImage AS image4, accommodationImages.strFifthImage AS image5
+      FROM accommodations
+      LEFT JOIN cities ON cities.id = accommodations.cityId
+      LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
+      LEFT JOIN countries ON countries.id = cities.countryId
+      WHERE cities.strName LIKE '%".$location."%'";
+
+    $results = mysqli_query($con, $sql);
+
+    // print_r($accommodations);
+    // print_r($_GET);
+
+    if($results) {
+       //set default 
+      $html = "<ul>";
+
+      // make list of suggestion
+      while($row = mysqli_fetch_assoc($results))
+      {
+        $html = $html."<li>".$row["city"]."</li>";
+      }
+
+      $html = $html."</ul>";
+
+      echo $html;
+    }
   }
 
   // get all accommodation 
   public static function getAll()
   {
-    $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image 
+    $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image, accommodationImages.strSecondImage AS image2, accommodationImages.strThirdImage AS image3, accommodationImages.strFourthImage AS image4, accommodationImages.strFifthImage AS image5
     FROM accommodations
     LEFT JOIN cities ON cities.id = accommodations.cityId
     LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
     LEFT JOIN countries ON countries.id = cities.countryId"); 
-    // $accommodations = DB::query("SELECT accommodations.id AS id, types.id AS typeID, types.strName AS type, accommodations.strName, strDescription, maxGuestNumber, price, cities.strName AS cityName, countries.strName AS strCountry, accommodationImages.strFirstImage AS image 
-    // FROM accommodationTypes
-    // LEFT JOIN types ON accommodationTypes.typeId = types.id
-    // LEFT JOIN accommodations ON accommodationTypes.accommodationId = accommodations.id
-    // LEFT JOIN cities ON cities.id = accommodations.cityId
-    // LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accomodationImageId
-    // LEFT JOIN countries ON countries.id = cities.countryId"); 
 
     // acting as a factory
     $accommodationArray = array(); // set default(empty)
@@ -66,20 +127,12 @@ Class Accommodations {
 
     // if(isset($_GET["aId"]))
     // {
-    $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image 
+    $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image, accommodationImages.strSecondImage AS image2, accommodationImages.strThirdImage AS image3, accommodationImages.strFourthImage AS image4, accommodationImages.strFifthImage AS image5
     FROM accommodations
     LEFT JOIN cities ON cities.id = accommodations.cityId
     LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
     LEFT JOIN countries ON countries.id = cities.countryId
     WHERE accommodations.id = ".$id.""); 
-    // $accommodations = DB::query("SELECT accommodations.id AS id, types.id AS typeID, types.strName AS type, accommodations.strName, strDescription, maxGuestNumber, price, cities.strName AS cityName, countries.strName AS strCountry, accommodationImages.strFirstImage AS image 
-    // FROM accommodationTypes
-    // LEFT JOIN types ON accommodationTypes.typeId = types.id
-    // LEFT JOIN accommodations ON accommodationTypes.accommodationId = accommodations.id
-    // LEFT JOIN cities ON cities.id = accommodations.cityId
-    // LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accomodationImageId
-    // LEFT JOIN countries ON countries.id = cities.countryId
-    // WHERE accommodations.id = ".$id.""); 
     
     // acting as a factory
     $accommodationArray = array(); // set default(empty)
@@ -98,7 +151,7 @@ Class Accommodations {
   // get randam 4 accommodation
   public static function getRandAccommodations()
 	{
-		$accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image 
+		$accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image, accommodationImages.strSecondImage AS image2, accommodationImages.strThirdImage AS image3, accommodationImages.strFourthImage AS image4, accommodationImages.strFifthImage AS image5
     FROM accommodations
     LEFT JOIN cities ON cities.id = accommodations.cityId
     LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
@@ -120,7 +173,7 @@ Class Accommodations {
   
   // get accommodation group by city
   public static function getAllCity($id) {
-    $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image 
+    $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image, accommodationImages.strSecondImage AS image2, accommodationImages.strThirdImage AS image3, accommodationImages.strFourthImage AS image4, accommodationImages.strFifthImage AS image5
     FROM accommodations
     LEFT JOIN cities ON cities.id = accommodations.cityId
     LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
