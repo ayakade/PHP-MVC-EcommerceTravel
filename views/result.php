@@ -1,4 +1,8 @@
 <div class="result">
-    <h3>Search results</h3>
-    accomodations will show up here
+    <h2>Search results</h2>
+
+    <?=$this->searchHTML?> 
+
+    <?=$this->resultHTML?> 
+    
 </div><!-- .redult / result.php -->
