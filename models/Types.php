@@ -27,9 +27,9 @@ Class Types {
 	}
 	
 	// get spesific type accomodations
-	public static function getType()
+	public static function getType($id)
 	{
-		$types = DB::query("SELECT * from types"); 
+		$types = DB::query("SELECT * from types WHERE id = ".$id.""); 
 
         // acting as a factory
 		$typeArray = array(); // empty array to avoid errors when no assignments were found
