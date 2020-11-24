@@ -1,6 +1,6 @@
 <div class="search">
     <h1>Find a booking with booking number<h1>
-    <form id="admin-search" method="post" action="index.php">
+    <form id="admin-search" method="get" action="index.php">
         <input type="hidden" name="controller" value="admin" />                
         <input type="hidden" name="action" value="search" />
 
