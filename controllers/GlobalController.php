@@ -1,7 +1,8 @@
 <?php
 Class GlobalController extends Controller {
 	
-    var $content = "";
+	var $content = "";
+	var $userId="";
     
     // header
 	public function header()
