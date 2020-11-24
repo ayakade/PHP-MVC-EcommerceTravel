@@ -65,19 +65,19 @@ document.addEventListener("DOMContentLoaded", function() {
         var subtotal = $('#subtotal'); 
         var subtotalPrice = price * totalStay;
         console.log(subtotalPrice);
-        subtotal.val("$"+ subtotalPrice);
+        subtotal.val(subtotalPrice);
 
         // tax (5%)
         var tax =$('#tax');
         var taxPrice = subtotalPrice * 0.05;
         console.log(taxPrice);
-        tax.val("$"+ taxPrice);
+        tax.val(taxPrice);
 
         // total
         var total =$('#total');
         var totalPrice = subtotalPrice + taxPrice;
         console.log(totalPrice);
-        total.val("$"+ totalPrice);
+        total.val(totalPrice);
 
         // $(document).ready(function() { 
             
@@ -85,17 +85,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // sub total
         $('#subtotal').change(function(){
-            $('#subtotal').val("$"+ subtotalPrice);
+            $('#subtotal').val(subtotalPrice);
         });
 
         // tax
         $('#tax').change(function(){
-            $('#tax').val("$"+ taxPrice);
+            $('#tax').val(taxPrice);
         });
 
         // total
         $('#total').change(function(){
-            $('#total').val("$"+ totalPrice);
+            $('#total').val(totalPrice);
         });
     });
 });
