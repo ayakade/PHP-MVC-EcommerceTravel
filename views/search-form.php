@@ -4,7 +4,7 @@
 
     <div class="fieldgroup required">
         <label>Location</label>
-        <input type="text" class="location" name="location" value="" placeholder="location">
+        <input type="text" class="location" name="location" value="<?=$this->location?>" placeholder="location">
         <div class="suggest"></div>
         <div class="errorpopup">
             <p>This field is required</p>
@@ -13,7 +13,7 @@
 
     <div class="fieldgroup required">
         <label>Check in</label>
-        <input type="date" id="checkin" name="checkin" value="">
+        <input type="date" id="checkin" name="checkin" value="<?=$this->checkin?>">
         <div class="errorpopup">
             <p>This field is required</p>
         </div><!-- .error pop up -->
@@ -21,7 +21,7 @@
 
     <div class="fieldgroup required">
         <label>Check out</label>
-        <input type="date" id="checkout" name="checkout" value="">
+        <input type="date" id="checkout" name="checkout" value="<?=$this->checkout?>">
         <div class="errorpopup">
             <p>This field is required</p>
         </div><!-- .error pop up -->
@@ -29,7 +29,7 @@
 
     <div class="fieldgroup required">
         <label>Guests</label>
-        <input type="text" id="guest" name="guest" value="" placeholder="guest">
+        <input type="text" id="guest" name="guest" value="<?=$this->guest?>" placeholder="guest">
         <div class="errorpopup">
             <p>This field is required</p>
         </div><!-- .error pop up -->
