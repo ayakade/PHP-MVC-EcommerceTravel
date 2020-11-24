@@ -33,7 +33,7 @@ Class Bookings {
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
-        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id"); 
 
         // acting as a factory
@@ -56,7 +56,7 @@ Class Bookings {
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
-        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         WHERE userId ='".$userId."' AND status = 0"); 
 
@@ -90,14 +90,14 @@ Class Bookings {
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
-        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         WHERE userId ='".$userId."' AND status = 1"); 
 
         // if there's no past bookings
         if($bookings == "") {
             //make an object with no booking data
-            $bookingArray = array((object) array("id" => "0", 'accommodation' => 'no upcoming trip'));
+            $bookingArray = array((object) array("id" => "0", 'accommodation' => 'no past trip'));
 
             return $bookingArray;
 
@@ -123,7 +123,7 @@ Class Bookings {
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
-        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         WHERE status = 0"); 
 
@@ -157,7 +157,7 @@ Class Bookings {
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
-        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         WHERE status = 1"); 
 
@@ -190,7 +190,7 @@ Class Bookings {
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
-        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         WHERE bookings.id='".$id."'"); 
 
@@ -214,7 +214,7 @@ Class Bookings {
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
-        LEFT JOIN accommodationImages ON accommodations.accomodationImageId = accommodationImages.id
+        LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         WHERE bookings.id='".$id."'");
 
@@ -226,5 +226,11 @@ Class Bookings {
 		} else {
 			return false;
 		}
+    }
+
+    // save session data
+    public static function newBooking() 
+    {
+
     }
 }
