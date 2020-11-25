@@ -280,7 +280,6 @@ nav {
 	margin-bottom: 3px;
 }
 
-
 /* city-reccomend */
 
 .city-recommend,  .accommodation-type, .accommodation-recommend {
@@ -489,14 +488,19 @@ nav {
 	margin-bottom: 20px;
 }
 
+.price .row {
+	justify-content: space-between;
+}
+
 .price .row label{
-	width: 50%;
+	width: 200px;
 }
 
 .price .row input {
 	text-align: right;
 	border: none;
 	color: #044b6b;
+	width: 50px;
 }
 
 /* checkout */
