@@ -9,7 +9,7 @@
                 <div class="title">
                     <h3><?=$accommodation->strName?></h3>
                     <p><?=$accommodation->city?>, <?=$accommodation->country?></p>
-                    <p>$<?=$accommodation->price?>/night</p>
+                    <p><strong>$<?=$accommodation->price?></strong>/night</p>
                     <div class="cta">Check detail</div>
                 </div><!-- .title -->
             </a>
