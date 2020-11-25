@@ -5,7 +5,7 @@
     {
     ?>
     <div class="booking">
-        <a href="index.php?controller=<?=$this->controller?>&action=booking&bId=<?=$booking->id?>">
+        <a href="index.php?controller=<?=$this->controller?>&action=booking&bId=<?=$booking->id?>&status=<?=$booking->status?>">
         <p><?=$booking->accommodation?></p>
         </a>
     </div><!-- .booking -->
