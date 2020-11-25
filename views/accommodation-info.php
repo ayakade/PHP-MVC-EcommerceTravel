@@ -26,12 +26,12 @@
                 <input type="hidden" name="accommodationId" value="<?=$accommodation->id?>" />
 
                 <p>$<strong><?=$accommodation->price?></strong>/night</p>
-                <input type="hidden" id="price" name="price" value="<?=$accommodation->price?>" />
+                <input type="hidden" id="price" class="calculate" name="price" value="<?=$accommodation->price?>" />
 
                 <div class="row">
                     <div class="fieldgroup required">
                         <label>Check-in</label>
-                        <input type="date" id="checkin" name="checkin" value="" />
+                        <input type="date" id="checkin" class="calculate" name="checkin" value="<?=$this->checkin?>" />
                         <div class="errorpopup">
                             <p>This field is required</p>
                         </div><!-- .error pop up -->
@@ -39,7 +39,7 @@
 
                     <div class="fieldgroup required">
                         <label>Check-out</label>
-                        <input type="date" id="checkout" name="checkout" value="" />
+                        <input type="date" id="checkout" class="calculate" name="checkout" value="<?=$this->checkout?>" />
                         <div class="errorpopup">
                             <p>This field is required</p>
                         </div><!-- .error pop up -->
@@ -48,34 +48,31 @@
 
                 <div class="fieldgroup required">
                     <label>Guest number</label>
-                    <input type="text" id="guest" name="guest" value="" />
+                    <input type="text" id="guest" name="guest" value="<?=$this->guest?>" />
                     <div class="errorpopup">
                         <p>This field is required</p>
                     </div><!-- .error popup -->
                 </div><!-- .fieldgroup -->
-
-                <p id="orderTotal" onclick="calculatePrice()">calculate</p>
 
                 <input class="cta" type="submit" value="Book now">
 
                 <div class="price">
                     <div class="row">
                         <label>subtotal</label>
-                        <input type="text" id="subtotal" name="subtotal" value="100" />
+                        <p>$</p><input type="text" id="subtotal" name="subtotal" value="" />
                     </div><!-- .row -->
 
                     <div class="row">
                         <label>tax</label>
-                        <input type="text" id="tax" name="tax" value="5" />
+                        <p>$</p><input type="text" id="tax" name="tax" value="" />
                     </div><!-- .row -->
 
                     <div class="row">
                         <label>total</label>
-                        <input type="text" id="total" name="total" value="120" />
+                        <p>$</p><input type="text" id="total" name="total" value="" />
                     </div><!-- .row -->
                 </div><!-- .price -->
             </form>
-
 
             <div class="detail">
                 <p><?=$accommodation->strDescription?></p>
