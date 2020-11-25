@@ -17,11 +17,11 @@ Class AdminController extends Controller {
 		// if username & password are given
 		if(!($username=="" OR $password==""))
 		{
-			$_SESSION["userId"] = Employees::logIn($username);
+			$_SESSION["adminId"] = Employees::logIn($username);
 			// echo $_SESSION["userId"];
 
 			// get user info with user ID
-			$user = Employees::getUserInfo($_SESSION["userId"]);
+			$user = Employees::getUserInfo($_SESSION["adminId"]);
 			// print_r($user);
 
 			if ($user)
@@ -60,7 +60,11 @@ Class AdminController extends Controller {
 	{
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
-        $this->loadView("views/admin-search.php", 1, "contentHTML"); 
+		$this->loadView("views/admin-search.php", 1, "mainHTML"); 
+		$this->loadData(Bookings::getAllUpcomingBookings(), "oBookings"); 
+		$this->loadView("views/upcoming-bookings.php", 1, "mainHTML");
+		$this->loadView("views/admin-main.php", 1, "contentHTML"); // save the results of this view, into $this->content
+
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-admin.php"); // final view
@@ -84,6 +88,8 @@ Class AdminController extends Controller {
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
 		$this->loadData(Accommodations::getAccommodation($_GET["aId"]), "oAccommodations");
+		$this->loadData(Cities::getAllCities(), "oCities");
+		$this->loadData(Types::getAllType(), "oTypes");
         $this->loadView("views/admin-accommodation.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
@@ -93,6 +99,8 @@ Class AdminController extends Controller {
 	// add new accomodation 
 	public function addNew() 
 	{
+		$this->js("js/add.js");
+
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
 		$this->loadData(Cities::getAllCities(), "oCities");
@@ -240,9 +248,14 @@ Class AdminController extends Controller {
 
 	// find a booking with booking # 
 	public function search() {
-		$_SESSION["bId"] = Bookings::search($_POST["id"]);
+		$_SESSION["id"] = Bookings::search($_GET["id"]);
+		// echo $_SESSION["id"];
+		
+		$search = Bookings::getBookingInfo($_SESSION["id"]);
+		// print_r($search);
 
-		if($_SESSION["bId"]) {
+		if($search) {
+			// echo "found";
 			$this->go("admin", "result"); 
 		} else {
 			echo "no match booking record";
@@ -253,7 +266,7 @@ Class AdminController extends Controller {
 	public function result() {
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
-		$this->loadData(Bookings::getBookingInfo($_SESSION["bId"]), "oBookings"); 
+		$this->loadData(Bookings::getBookingInfo($_SESSION["id"]), "oBookings"); 
 		$this->loadView("views/admin-booking.php", 1, "contentHTML"); 
 		$this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
@@ -265,6 +278,8 @@ Class AdminController extends Controller {
     {
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 		
+		// $this->loadView("views/admin-search.php", 1, "searchHTML"); 
+
 		$this->loadData(Bookings::getAllUpcomingBookings(), "oBookings"); 
 		$this->loadView("views/upcoming-bookings.php", 1, "upcomingHTML"); 
 
@@ -316,18 +331,18 @@ Class AdminController extends Controller {
     // admin logout
     public function doLogOut()
     {
-		unset($_SESSION["userId"]);
+		unset($_SESSION["adminId"]);
 		$this->go("public", "adminLogin");
 	}
 
 	// if session is out go back admin login page
 	public function pretrip(){
 
-		if($_SESSION["userId"]=="")
+		if($_SESSION["adminId"]=="")
 		{
 			$this->go("public", "adminLogin");
 		} else {
-			$this->oUser = Employees::getUserInfo($_SESSION["userId"]);
+			$this->oUser = Employees::getUserInfo($_SESSION["adminId"]);
 		}
 	}
 }
