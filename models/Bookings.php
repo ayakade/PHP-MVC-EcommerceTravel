@@ -8,7 +8,8 @@ Class Bookings {
         $this->userId = $data["userId"];
         $this->name = $data["name"];
         $this->accommodationId = $data["accommodationId"];
-		$this->accommodation = $data["accommodation"];
+        $this->accommodation = $data["accommodation"];
+        $this->city = $data["city"];
 		$this->image = $data["image"];
 		$this->checkin = $data["checkin"];
         $this->checkout = $data["checkout"];
@@ -28,11 +29,12 @@ Class Bookings {
     // get all booking info 
     public static function getAll()
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, cities.strName AS city, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN cities ON accommodations.cityId = cities.id
         LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         LEFT JOIN bookingStatus ON bookings.bookingStatusId = bookingStatus.id"); 
@@ -52,11 +54,12 @@ Class Bookings {
     // user page: get their upcoming bookings  
     public static function getUpcomingBookings($userId)
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, cities.strName AS city, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN cities ON accommodations.cityId = cities.id
         LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         LEFT JOIN bookingStatus ON bookings.bookingStatusId = bookingStatus.id
@@ -65,7 +68,7 @@ Class Bookings {
         // if there's no upcoming bookings
         if($bookings == "") {
             //make an object with no booking data
-            $bookingArray = array((object) array("id" => "0", 'accommodation' => 'no upcoming trip'));
+            $bookingArray = array((object) array("id" => "", 'accommodation' => 'no upcoming trip', "checkin" => "", 'checkout' => '', "city" => "", 'country' => ''));
 
             return $bookingArray;
 
@@ -87,11 +90,12 @@ Class Bookings {
     // user page: get their past bookings  
     public static function getPastBookings($userId)
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
+        $bookings = DB::query("SSELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, cities.strName AS city, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN cities ON accommodations.cityId = cities.id
         LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         LEFT JOIN bookingStatus ON bookings.bookingStatusId = bookingStatus.id
@@ -100,7 +104,7 @@ Class Bookings {
         // if there's no past bookings
         if($bookings == "") {
             //make an object with no booking data
-            $bookingArray = array((object) array("id" => "0", 'accommodation' => 'no past trip'));
+            $bookingArray = array((object) array("id" => "", 'accommodation' => 'no past trip', "checkin" => "", 'checkout' => '', "city" => "", 'country' => ''));
 
             return $bookingArray;
 
@@ -121,11 +125,12 @@ Class Bookings {
     // admin page: get all upcoming bookings  
     public static function getAllUpcomingBookings()
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, cities.strName AS city, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN cities ON accommodations.cityId = cities.id
         LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         LEFT JOIN bookingStatus ON bookings.bookingStatusId = bookingStatus.id
@@ -134,7 +139,7 @@ Class Bookings {
         // if there's no upcoming bookings
         if($bookings == "") {
             //make an object with no booking data
-            $bookingArray = array((object) array("id" => "0", 'accommodation' => 'no upcoming trip'));
+            $bookingArray = array((object) array("id" => "", 'accommodation' => 'no upcoming trip', "checkin" => "", 'checkout' => '', "city" => "", 'country' => ''));
 
             return $bookingArray;
 
@@ -156,11 +161,12 @@ Class Bookings {
     // admin page: get all past bookings  
     public static function getAllPastBookings()
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, cities.strName AS city, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN cities ON accommodations.cityId = cities.id
         LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         LEFT JOIN bookingStatus ON bookings.bookingStatusId = bookingStatus.id
@@ -169,7 +175,7 @@ Class Bookings {
         // if there's no past bookings
         if($bookings == "") {
             //make an object with no booking data
-            $bookingArray = array((object) array("id" => "0", 'accommodation' => 'no upcoming trip'));
+            $bookingArray = array((object) array("id" => "", 'accommodation' => 'no upcoming trip', "checkin" => "", 'checkout' => '', "city" => "", 'country' => ''));
 
             return $bookingArray;
 
@@ -190,11 +196,12 @@ Class Bookings {
     // get specific booking info 
     public static function getBookingInfo($id)
     {
-        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, cities.strName AS city, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN cities ON accommodations.cityId = cities.id
         LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         LEFT JOIN bookingStatus ON bookings.bookingStatusId = bookingStatus.id
@@ -215,11 +222,12 @@ Class Bookings {
     // get booking info matches boooking number
 	public static function search($id)
 	{
-		$arrBooking = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
+		$arrBooking = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, cities.strName AS city, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
         LEFT JOIN accommodations ON bookings.accommodationId =accommodations.id
+        LEFT JOIN cities ON accommodations.cityId = cities.id
         LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         LEFT JOIN bookingStatus ON bookings.bookingStatusId = bookingStatus.id
@@ -235,9 +243,10 @@ Class Bookings {
 		}
     }
 
-    // save session data
-    public static function newBooking() 
-    {
+    // delete a booking at admin
+    public static function delete($id) {
+        $sql = "DELETE FROM bookings WHERE id='".$id."'";
 
+	    mysqli_query(DB::connect(), $sql);
     }
 }
