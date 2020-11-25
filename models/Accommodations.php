@@ -53,15 +53,9 @@ Class Accommodations {
     }
   }
 
+  // find city name similar to typed word
   public static function suggest($location)
   {
-    // $accommodations = DB::query("SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image, accommodationImages.strSecondImage AS image2, accommodationImages.strThirdImage AS image3, accommodationImages.strFourthImage AS image4, accommodationImages.strFifthImage AS image5
-    // FROM accommodations
-    // LEFT JOIN cities ON cities.id = accommodations.cityId
-    // LEFT JOIN accommodationImages ON accommodationImages.id = accommodations.accommodationImageId
-    // LEFT JOIN countries ON countries.id = cities.countryId
-    // WHERE cities.strName LIKE '%".$location."%'"); 
-
     $con = DB::connect();
     $sql = "SELECT accommodations.id AS id,accommodations.strName, strDescription, maxGuestNumber, price, cities.id AS cityId, cities.strName AS city, countries.strName AS country, accommodationImages.strFirstImage AS image, accommodationImages.strSecondImage AS image2, accommodationImages.strThirdImage AS image3, accommodationImages.strFourthImage AS image4, accommodationImages.strFifthImage AS image5
       FROM accommodations
