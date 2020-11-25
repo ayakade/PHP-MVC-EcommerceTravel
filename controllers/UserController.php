@@ -5,6 +5,15 @@ Class UserController extends Controller {
 	var $content = "";
 	var $title = "Your";
 	var $controller = "user";
+	var $action = "";
+	var $footerHTML = "";
+	var $userId="";
+	var $reviewHTML = "";
+
+	// for checkout
+	var $subtotal = "";
+	var $tax = "";
+	var $total = "";
 
 	// user login
 	public function doLogIn()
@@ -31,9 +40,15 @@ Class UserController extends Controller {
 				// check if password matches
 				if (password_verify($user->strPassword, $passwordHash)) 
 				{
-					// go to user main page (booking list page) if match
-					$this->go("user", "bookingList"); 
-
+					// when at checkout
+					if(isset($_SESSION["total"])) {
+						// go to checkout page
+						$this->go("user", "checkout"); 
+					} else {
+						// usual login
+						// go to user main page (booking list page) if match
+						$this->go("user", "bookingList"); 
+					}
 				} else {
 					$this->go("public", "mError"); 
 					// echo "password not correct";
@@ -66,28 +81,30 @@ Class UserController extends Controller {
 
 		mysqli_query($con, $sql);
 
-		$this->go("user", "userMain");
-
 		// after resgister get the new ID
-		// $lastID = mysqli_insert_id($con);
-		// // echo "last ID: ".$lastID;
-		// // die;
-		// $_SESSION["userId"] = $lastID;
+		$lastID = mysqli_insert_id($con);
 
-		// return true;
+		$_SESSION["userId"] = $lastID;
 
 		// // get user info with user ID
-		// $user = Users::getUserInfo($lastID);
+		$user = Users::getUserInfo($lastID);
 
-		// if ($user)
-		// {
-		// 	$this->go("user", "userMain");
-			
-		// } else {
-		// 	// if unsucseful 
-		// 	// echo "unsucseful";
-		// 	$this->go("public", "signup"); 
-		// }
+		if ($user)
+		{
+			// when at checkout
+			if(isset($_SESSION["total"])) {
+				// go to checkout page
+				$this->go("user", "checkout"); 
+			} else {
+				// usual signup
+				// go to user main page (booking list page) if match
+				$this->go("user", "bookingList"); 
+			}
+		} else {
+			// if unsucseful 
+			echo "unsucseful";
+			// $this->go("public", "signup"); 
+		}
 	}
 
 	// user main page after login 
@@ -124,6 +141,13 @@ Class UserController extends Controller {
 		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
 
 		$this->loadData(Bookings::getBookingInfo($_GET["bId"]), "oBookings"); 
+		$status = $_GET["status"];
+
+		// if it's past booking shop review form
+		if($status = "past") {
+			$this->loadView("views/user-review-form.php", 1, "reviewHTML");
+		} 
+
 		$this->loadView("views/user-booking.php", 1, "contentHTML"); 
 		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
 
@@ -169,6 +193,93 @@ Class UserController extends Controller {
 		$this->loadLastView("views/main-user.php"); // final view
 	}
 
+	public function goCheckout() {
+
+		// if all required field is filled
+        if($_POST["checkin"] && $_POST["checkout"] && $_POST["guest"] && $_POST["subtotal"] && $_POST["tax"] && $_POST["total"])
+		{
+			$_SESSION["accommodationId"] = $_POST["accommodationId"];
+			$_SESSION["checkin"] = $_POST["checkin"];
+			$_SESSION["checkout"] = $_POST["checkout"];
+			$_SESSION["guest"] = $_POST["guest"];
+			$_SESSION["subtotal"] = $_POST["subtotal"];
+			$_SESSION["tax"] = $_POST["tax"];
+			$_SESSION["total"] = $_POST["total"];
+			
+			if($_SESSION["userId"]=="")
+			{
+				// if user haven't login go login page
+				$this->go("public", "memberLogin");
+			} else {
+				// continue to checkout page
+				$this->go("user", "checkout"); 
+			}
+		} else {
+			echo "error";
+		}
+   	}
+
+   // checkout page
+   	public function checkout() {
+		$this->js("js/payment.js");
+
+		$this->loadRoute("Global", "header", "headerHTML"); // load header
+		//    $this->loadRoute("Global", "footer", "footerHTML"); // load footer
+
+		$this->checkin = $_SESSION["checkin"];
+		$this->checkout = $_SESSION["checkout"];
+		$this->guest = $_SESSION["guest"];
+		$this->subtotal = $_SESSION["subtotal"];
+		$this->tax = $_SESSION["tax"];
+		$this->total = $_SESSION["total"];
+		
+		$this->loadData(Accommodations::getAccommodation($_SESSION["accommodationId"]), "oAccommodations"); // this now gives me a $this->oAccommodations
+		$this->loadView("views/checkout.php", 1, "contentHTML"); 
+
+		$this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main.php"); // final view
+   	}
+
+    // process checkout/ save a new booking 
+	public function processCheckout() {
+
+		// insert to db
+		$con = DB::connect();
+		$sql = "INSERT INTO bookings (userId, accommodationId, checkin, checkout, totalStay, guestNumber, subtotal, tax, total, bookingProcessedDate, bookingStatusId) 
+				VALUES ('".$_SESSION["userId"]."', '".$_POST["accommodationId"]."','".$_POST["checkin"]."','".$_POST["checkout"]."', '".$_POST["totalStay"]."', '".$_POST["guest"]."','".$_POST["subtotal"]."','".$_POST["tax"]."','".$_POST["total"]."', CURDATE(), '1')";
+
+		// print_r($sql);
+		mysqli_query($con, $sql);
+
+		// after insert get the new ID
+		$lastID = mysqli_insert_id($con);
+
+		$_SESSION["bookingId"] = $lastID;
+
+		if ($_SESSION["bookingId"])
+		{
+			$this->go("user", "confirmation"); 
+			
+		} else {
+			// if unsucseful 
+			echo "unsucseful";
+			echo $sql;
+		}
+	}
+
+   // booking completed
+	public function confirmation() {
+		$this->loadRoute("Global", "header", "headerHTML"); // load header
+		// $this->loadRoute("Global", "footer", "footerHTML"); // load footer
+		
+		$this->loadView("views/confirmation.php", 1, "contentHTML"); 
+
+        $this->loadView("views/basic-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main.php"); // final view
+	}
+
 	// account info update
 	public function doUpdate() 
 	{
@@ -187,11 +298,15 @@ Class UserController extends Controller {
 	// if session is out go back customer login page
 	public function pretrip(){
 
-		if($_SESSION["userId"]=="")
+		$this->userId = $_SESSION["userId"];
+
+		if($_SESSION["userId"] == "")
 		{
 			$this->go("public", "memberLogin");
 		} else {
-			$this->oUser = Users::getUserInfo($_SESSION["userId"]);
+			$this->userId = $_SESSION["userId"];
+			$this->oUser = Users::getUserInfo( $_SESSION["userId"]);
+			
 		}
 	}
 }
