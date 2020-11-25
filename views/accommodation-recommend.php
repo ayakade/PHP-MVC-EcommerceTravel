@@ -10,7 +10,7 @@
                     <img src="assets/<?=$accommodation->image?>" alt="<?=$accommodation->strName?>">
                     <h4><?=$accommodation->strName?></h4>
                     <p><?=$accommodation->city?>, <?=$accommodation->country?></p>
-                    <p><strong>$<?=$accommodation->price?>/night</strong></p>
+                    <p><strong>$<?=$accommodation->price?></strong>/night</p>
                 </a>
             </div><!-- .accommodation -->  
         <?php
