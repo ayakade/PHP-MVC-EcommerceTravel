@@ -6,7 +6,11 @@
     ?>
     <div class="booking">
         <a href="index.php?controller=<?=$this->controller?>&action=booking&bId=<?=$booking->id?>&status=<?=$booking->status?>">
-        <p><?=$booking->accommodation?></p>
+        <div class="row">
+            <p>#<?=$booking->id?> <?=$booking->accommodation?></p>
+            <p><?=$booking->city?></p>
+            <p><?=$booking->checkin?> <?=$booking->checkout?></p>
+        </div><!-- .row -->
         </a>
     </div><!-- .booking -->
     <?php
