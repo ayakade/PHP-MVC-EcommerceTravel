@@ -181,7 +181,6 @@ Class AdminController extends Controller {
 	}
 
 	// update accommodation info
-
 	public function update() {
 		// if all required field is filled
         if($_POST["strName"] && $_POST["city"] && $_POST["price"] && $_POST["maxGuestNumber"] && $_POST["type"] && $_POST["strDescription"] && $_FILES["image"])
@@ -243,7 +242,6 @@ Class AdminController extends Controller {
             // if unsucseful 
             echo "unsucseful";
 		}
-
 	}
 
 	// find a booking with booking # 
@@ -264,6 +262,8 @@ Class AdminController extends Controller {
 
 	// booking search result page
 	public function result() {
+		$this->js("js/delete.js");
+
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
 		$this->loadData(Bookings::getBookingInfo($_SESSION["id"]), "oBookings"); 
@@ -278,7 +278,7 @@ Class AdminController extends Controller {
     {
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 		
-		// $this->loadView("views/admin-search.php", 1, "searchHTML"); 
+		$this->loadView("views/admin-search.php", 1, "contentHTML"); 
 
 		$this->loadData(Bookings::getAllUpcomingBookings(), "oBookings"); 
 		$this->loadView("views/upcoming-bookings.php", 1, "upcomingHTML"); 
@@ -295,6 +295,8 @@ Class AdminController extends Controller {
 	// specific booking info
 	public function booking()
 	{
+		$this->js("js/delete.js");
+
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
 		$this->loadData(Bookings::getBookingInfo($_GET["bId"]), "oBookings"); 
@@ -302,6 +304,13 @@ Class AdminController extends Controller {
 		$this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-admin.php"); // final view
+	}
+
+	// delete a booking 
+	public function delete() {
+		Bookings::delete($_GET["id"]);
+		// echo"success";
+		$this->go("admin", "bookingList"); 
 	}
 
     // customer's list
