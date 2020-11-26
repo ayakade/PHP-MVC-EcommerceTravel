@@ -12,5 +12,7 @@
         <?=$this->content?> 
     </div><!-- .wrapper -->
 	<script src="https://kit.fontawesome.com/76c00b2855.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
 </body>
 </html>
