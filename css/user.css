@@ -73,12 +73,11 @@ p {
 
 #flyoutMenu {
 	background:#6DA4A9;
-	text-align: center; 
 	width: 100%; 
 	height: 100vh;
 	position: absolute;
 	left: -100vw;
-	padding-top: 80px;
+	padding-left: 30px;
 	transition: left .5s linear;
 	z-index: 1;
 }
@@ -169,8 +168,29 @@ nav {
 	margin-bottom: 10px;
 }
 
-.bookings .booking p {
+.bookings .booking {
+	border: #6DA4A9 1px solid;
+	border-radius: 20px;
+	padding: 15px;
+	margin-bottom: 10px;
+}
+
+.bookings .booking .row {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookings .booking .row p {
 	font-size: 18px;
+}
+
+.bookings .booking .row p:nth-child(2) {
+	font-size: 14px;
+	margin-top: 3px;
+}
+
+.bookings .booking .row p:nth-child(3) {
+	font-size: 14px;
 }
 
 /* booking */
@@ -206,6 +226,7 @@ nav {
 
 .booking-info .booking table tr th, .booking-info .booking table tr td {
 	margin-bottom: 10px;
+	height: 20px;
 }
 
 .booking-info .booking table tr td {
@@ -411,7 +432,9 @@ nav {
 
 	.booking-info .row {
 		display: flex;
+		margin: 0 auto;
 		margin-bottom: 30px;
+		width: 1000px;
 	}
 
 	.booking-info .booking .row {
@@ -420,14 +443,20 @@ nav {
 		margin: 0 auto;
 	}
 
+	.booking-info .secondary-cta {
+		text-align: center;
+	}
+
 	.booking-info .reviews {
 		text-align: left;
-		width: 500px;
+		width: 400px;
 	}
 
 	.booking-info .reviews .fieldgroup select {
 		margin: 0;
 	}
+
+	
 
 	/* account */
 
