@@ -50,7 +50,8 @@
         <div class="action">
             <a class="cta" href="index.php?controller=admin&action=bookingList">Go back booking list</a>
             <?php
-            if($booking->status="upcoming") {
+            // if it's upcoming booking add delete btn
+            if($booking->status=="upcoming") {
             ?>
             <input class="cta delete" type="submit" value="Delete this booking">
             <?php
