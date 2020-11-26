@@ -90,6 +90,7 @@ Class AdminController extends Controller {
 		$this->loadData(Accommodations::getAccommodation($_GET["aId"]), "oAccommodations");
 		$this->loadData(Cities::getAllCities(), "oCities");
 		$this->loadData(Types::getAllType(), "oTypes");
+		$this->loadData(Categories::getType($_GET["aId"]), "oCategories");
         $this->loadView("views/admin-accommodation.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
