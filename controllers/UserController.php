@@ -142,9 +142,10 @@ Class UserController extends Controller {
 
 		$this->loadData(Bookings::getBookingInfo($_GET["bId"]), "oBookings"); 
 		$status = $_GET["status"];
+		// echo $_GET["status"];
 
-		// if it's past booking shop review form
-		if($status = "past") {
+		// if it's past booking show review form
+		if($status == "past") {
 			$this->loadView("views/user-review-form.php", 1, "reviewHTML");
 		} 
 
