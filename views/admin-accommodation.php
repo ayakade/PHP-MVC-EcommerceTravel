@@ -3,7 +3,10 @@
     foreach ($this->oAccommodations as $accommodation)
     { 
     ?>
-    <h2><?=$accommodation->strName?></h2>
+    <div class="title">
+        <h2><?=$accommodation->strName?></h2>
+        <a class="cta" href="index.php?controller=public&action=accommodation&aId=<?=$accommodation->id?>" target="_blank" rel="noopener noreferrer">view page</a>
+    </div><!-- .title -->
 
     <div class="info">
         <form id="update" method="post" action="index.php" enctype="multipart/form-data">
@@ -16,7 +19,7 @@
             </div><!-- .fieldgroup -->
 
             <div class="fieldgroup">
-                <label>* City</label>
+                <label>City</label>
                 <select name="city">
                 <?php	
                 foreach ($this->oCities as $city)
@@ -40,13 +43,15 @@
             </div><!-- .fieldgroup -->
 
             <div class="fieldgroup">
-                <label>* Accommodation type</label>
+                <label>Accommodation type</label>
                 <?php	
+                // $category = $this->oCategories;
                 foreach ($this->oTypes as $type)
                 { 
-                ?>
+                // $checked = (isset($category["id"]))? "checked" : "";
+                // ?>
                 <div class="checkbox">
-                    <input type="checkbox" name="type[]" value="<?=$type->id?>"/>
+                    <input type="checkbox" name="type[]" value="<?=$type->id?> <?=$checked?>"/>
                     <span><?=$type->strName?></span>
                 </div><!-- .checkbox -->
                 <?php
