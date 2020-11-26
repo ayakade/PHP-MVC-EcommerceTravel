@@ -10,11 +10,11 @@
 		<div id="flyoutMenu">
         <?php
             $arrMenu = array(
-                array('menu'=>'Home', 'link'=>'index.php?controller=admin&action=adminMain', 'icon'=>''),
-                array('menu'=>'Accommodation', 'link'=>'index.php?controller=admin&action=accommodationList', 'icon'=>''),
-                array('menu'=>'Booking', 'link'=>'index.php?controller=admin&action=bookingList', 'icon'=>''),
-                array('menu'=>'Customers', 'link'=>'index.php?controller=admin&action=customerList', 'icon'=>''),
-                array('menu'=>'Logout', 'link'=>'index.php?controller=admin&action=doLogOut', 'icon'=>'')
+                array('menu'=>'Home', 'link'=>'index.php?controller=admin&action=adminMain'),
+                array('menu'=>'Accommodation', 'link'=>'index.php?controller=admin&action=accommodationList'),
+                array('menu'=>'Booking', 'link'=>'index.php?controller=admin&action=bookingList'),
+                array('menu'=>'Customers', 'link'=>'index.php?controller=admin&action=customerList'),
+                array('menu'=>'Logout', 'link'=>'index.php?controller=admin&action=doLogOut')
             );
            
             foreach ($arrMenu as $key => $menu) {
@@ -30,8 +30,7 @@
     <?php
         foreach ($arrMenu as $key => $menu) {
     ?>
-        <a href="<?=$menu["link"]?>"><?=$menu["menu"]?></a>
-        <!-- <a href="<?=$menu["link"]?>"><i class="f<?=$menu["icon"]?>"><?=$menu["menu"]?></a> -->
+        <a href="<?=$menu["link"]?>" class="menu"><?=$menu["menu"]?></a>
     <?php
         }
     ?>
