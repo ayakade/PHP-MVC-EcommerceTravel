@@ -461,6 +461,20 @@ input[type="submit"] {
 	margin-bottom: 10px;
 }
 
+.accommodation-info .info .action {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+}
+
+.accommodation-info .info .action .secondary-cta {
+	border: #044b6b 1px solid;
+	padding: 7px 20px;
+	border-radius: 10px;
+	font-size: 14px;
+	margin-top: 10px;
+}
+
 /* error */
 
 .error {
@@ -694,5 +708,18 @@ input[type="submit"] {
 
 	.accommodation-info .info .fieldgroup input[type="text"], .accommodation-info .info .fieldgroup select {
 		width: 300px;
+	}
+
+	.accommodation-info .info .action {
+		flex-direction: row;
+	}
+
+	.accommodation-info .info .action .cta, .accommodation-info .info .action .secondary-cta {
+		width: 400px;
+	}
+
+	.accommodation-info .info .action .secondary-cta {
+		margin: 0;
+		margin-left: 10px;
 	}
 }
