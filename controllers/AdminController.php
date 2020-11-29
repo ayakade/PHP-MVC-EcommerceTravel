@@ -266,7 +266,10 @@ Class AdminController extends Controller {
 			// echo "found";
 			$this->go("admin", "result"); 
 		} else {
-			echo "no match booking record";
+			$_SESSION["id"] = $_GET["id"];
+			$this->booking = $_SESSION["id"];
+			// echo "no match booking record";
+			$this->go("admin", "zero"); 	
 		}
 	}
 
@@ -278,6 +281,22 @@ Class AdminController extends Controller {
 
 		$this->loadData(Bookings::getBookingInfo($_SESSION["id"]), "oBookings"); 
 		$this->loadView("views/admin-booking.php", 1, "contentHTML"); 
+		$this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
+
+		$this->loadLastView("views/main-admin.php"); // final view
+	}
+
+	// when there's no match booking 
+	public function zero() {
+		$this->booking = $_SESSION["id"];
+		echo $_SESSION["id"];
+
+		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
+
+		$this->loadView("views/admin-search.php", 1, "searchHTML"); 
+		$this->loadView("views/no-record.php", 1, "contentHTML"); 
+
+
 		$this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
 		$this->loadLastView("views/main-admin.php"); // final view
