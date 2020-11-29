@@ -62,7 +62,7 @@ Class PublicController extends Controller {
 
 		// check if there's a match 
 		$search = Searches::search($_GET["location"], $_GET["checkin"], $_GET["checkout"], $_GET["guest"]);
-		print_r($search);
+		// print_r($search);
 
 		if($search) {
 			// echo "success";
