@@ -8,6 +8,7 @@
 		</div><!-- end of bars-->
 
 		<div id="flyoutMenu">
+            <p>Hi <?=$this->oUser->strFirstName?> :)</p>
         <?php
             $arrMenu = array(
                 // array('menu'=>'Website', 'link'=>'index.php'),
