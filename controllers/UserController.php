@@ -187,7 +187,6 @@ Class UserController extends Controller {
 	{
 		$this->loadRoute("Global", "userNav", "navHTML"); // load nav
 
-		$this->loadData(Users::getUserInfo($_SESSION["userId"]), "oUsers"); // this now gives me a $this->oUsers
 		$this->loadView("views/user-account.php", 1, "contentHTML"); 
 		$this->loadView("views/user-layout.php", 1, "content"); // save the results of this view, into $this->content
 
@@ -307,7 +306,6 @@ Class UserController extends Controller {
 		} else {
 			$this->userId = $_SESSION["userId"];
 			$this->oUser = Users::getUserInfo( $_SESSION["userId"]);
-			
 		}
 	}
 }
