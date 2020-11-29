@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		// when click the suggest word pass it to input field
 		$("li").on("click", function(){
 			$(".location").val($(this).html());
-			//we get the value of "this" innerHTML to go inside the input field "strInput" on click.
+			//we get the value of "this" innerHTML to go inside the input field "location" on click.
 			$(".suggest").hide();
 		}) 
 	}
