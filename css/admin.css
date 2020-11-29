@@ -76,11 +76,18 @@ p {
 	z-index: 1;
 }
 
+
+#flyoutMenu p {
+	margin: 50px 0;
+	font-size: 18px;
+}
+
+
 #flyoutMenu a {
 	color: #fff; 
 	display: block;
 	margin: 30px 0;
-	font-size: 20px;
+	font-size: 16px;
 }
 
 .checkBox {
@@ -541,9 +548,15 @@ input[type="submit"] {
 		
 	}
 
+	nav p {
+		color: #fff;
+		margin-bottom: 50px;
+		font-size: 20px;
+	}
+
 	nav a {
 		text-decoration: none;
-		font-size: 20px;
+		font-size: 18px;
 		color: #fff;
 		margin-bottom: 40px;
 		text-align: left;

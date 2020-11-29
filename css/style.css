@@ -808,12 +808,15 @@ nav {
 
 	.search {
 		display: flex;
-		align-items: flex-end;
 	}
 
 	.search .fieldgroup {
 		margin: 0;
 		margin-right: 10px;
+	}
+
+	.search .cta {
+		margin-top: 23px;
 	}
 
 	/* contaner */
