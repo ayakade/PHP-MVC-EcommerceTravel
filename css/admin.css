@@ -598,6 +598,14 @@ input[type="submit"] {
 	.search .fieldgroup input {
 		width: 250px;
 	}
+
+	.adminMain .row .bookings h4 {
+		margin-bottom: 20px;
+	}
+
+	.adminMain .bookings .booking {
+		width: 300px;
+	}
     
 	/* customer */
 	
