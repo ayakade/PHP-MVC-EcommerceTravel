@@ -24,8 +24,9 @@
                 <?php	
                 foreach ($this->oCities as $city)
                 { 
+                    $selected = ($accommodation->cityId == $city->id)? "selected" : "";
                 ?>
-                    <option value="<?=$city->id?>"><?=$city->strName?></option>
+                    <option value="<?=$city->id?>" <?=$selected?>><?=$city->strName?></option>
                 <?php
                 }
                 ?>
@@ -44,12 +45,11 @@
 
             <div class="fieldgroup">
                 <label>Accommodation type</label>
-                <?php	
-                // $category = $this->oCategories;
+                <?php
                 foreach ($this->oTypes as $type)
                 { 
-                // $checked = (isset($category["id"]))? "checked" : "";
-                // ?>
+                    // $checked = ($this->oCategories->typeID == $type->id)? "checked" : "";
+                ?>
                 <div class="checkbox">
                     <input type="checkbox" name="type[]" value="<?=$type->id?> <?=$checked?>"/>
                     <span><?=$type->strName?></span>
@@ -67,7 +67,7 @@
             <div class="fieldgroup">
                 <label>Image</label>
                 <img src="assets/<?=$accommodation->image?>" alt="<?=$accommodation->strName?>">
-                <input type="file" name="image" value="<?=$accommodation->image?>" />
+                <input type="file" name="image1" value="<?=$accommodation->image?>" />
             </div><!-- .fieldgroup -->
 
             <input class="cta" type="submit" value="Save">
