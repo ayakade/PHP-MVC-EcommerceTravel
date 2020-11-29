@@ -226,6 +226,16 @@ input[type="submit"] {
 	flex-direction: column;
 }
 
+/* no record */
+
+.no-record h2 {
+	margin-bottom: 30px;
+}
+
+.no-record .search h2 {
+	display: none;
+}
+
 /* customer list */
 
 .customerList h1 {
