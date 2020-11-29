@@ -85,6 +85,8 @@ Class AdminController extends Controller {
 	// accomodation detail
 	public function accommodation() 
 	{
+		$this->js("js/edit.js");
+
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
 		$this->loadData(Accommodations::getAccommodation($_GET["aId"]), "oAccommodations");
