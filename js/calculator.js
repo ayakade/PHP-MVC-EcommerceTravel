@@ -37,6 +37,24 @@ document.addEventListener("DOMContentLoaded", function() {
             // console.log(totalPrice);
             total.val(totalPrice);
 
+            // append each price
+            var $div = $('.price');
+            $div.append(`
+                    <div class="row">
+                        <label>subtotal</label>
+                        <p>$</p><input type="text" id="subtotal" name="subtotal" value="${subtotalPrice}" />
+                    </div><!-- .row -->
+
+                    <div class="row">
+                        <label>tax</label>
+                        <p>$</p><input type="text" id="tax" name="tax" value="${taxPrice}" />
+                    </div><!-- .row -->
+
+                    <div class="row">
+                        <label>total</label>
+                        <p>$</p><input type="text" id="total" name="total" value="${totalPrice}" />
+                    </div><!-- .row -->
+                    `);
         } else {
             // calculate price when type guest number
             $('#guest').keyup(function() {
@@ -59,9 +77,24 @@ document.addEventListener("DOMContentLoaded", function() {
                 // total
                 var totalPrice = subtotalPrice + taxPrice;
 
-                $('#subtotal').val(subtotalPrice);
-                $('#tax').val(taxPrice);
-                $('#total').val(totalPrice);
+                // append each price
+                var $div = $('.price');
+                $div.append(`
+                    <div class="row">
+                        <label>subtotal</label>
+                        <p>$</p><input type="text" id="subtotal" name="subtotal" value="${subtotalPrice}" />
+                    </div><!-- .row -->
+
+                    <div class="row">
+                        <label>tax</label>
+                        <p>$</p><input type="text" id="tax" name="tax" value="${taxPrice}" />
+                    </div><!-- .row -->
+
+                    <div class="row">
+                        <label>total</label>
+                        <p>$</p><input type="text" id="total" name="total" value="${totalPrice}" />
+                    </div><!-- .row -->
+                    `);
             });
         }
     });
