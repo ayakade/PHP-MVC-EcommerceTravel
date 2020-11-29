@@ -41,7 +41,7 @@ Class Types {
 
 		// return the list of objects
 		return $typeArray;
-    }
+	}
 }
 
 ?>
