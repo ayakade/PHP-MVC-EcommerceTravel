@@ -57,20 +57,6 @@
                 <input class="cta" type="submit" value="Book now">
 
                 <div class="price">
-                    <div class="row">
-                        <label>subtotal</label>
-                        <p>$</p><input type="text" id="subtotal" name="subtotal" value="" />
-                    </div><!-- .row -->
-
-                    <div class="row">
-                        <label>tax</label>
-                        <p>$</p><input type="text" id="tax" name="tax" value="" />
-                    </div><!-- .row -->
-
-                    <div class="row">
-                        <label>total</label>
-                        <p>$</p><input type="text" id="total" name="total" value="" />
-                    </div><!-- .row -->
                 </div><!-- .price -->
             </form>
 
