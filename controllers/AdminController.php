@@ -289,7 +289,7 @@ Class AdminController extends Controller {
 	// when there's no match booking 
 	public function zero() {
 		$this->booking = $_SESSION["id"];
-		echo $_SESSION["id"];
+		// echo $_SESSION["id"];
 
 		$this->loadRoute("Global", "adminNav", "navHTML"); // load nav
 
