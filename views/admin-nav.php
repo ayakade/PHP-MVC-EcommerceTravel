@@ -8,6 +8,7 @@
 		</div><!-- end of bars-->
 
 		<div id="flyoutMenu">
+            <p>Hello <?=$this->oUser->strFirstName?></p>
         <?php
             $arrMenu = array(
                 array('menu'=>'Home', 'link'=>'index.php?controller=admin&action=adminMain'),
@@ -27,6 +28,7 @@
 	</div><!-- end of burger menu -->
 
 	<nav>
+        <p>Hello <?=$this->oUser->strFirstName?></p>
     <?php
         foreach ($arrMenu as $key => $menu) {
     ?>
