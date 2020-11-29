@@ -12,6 +12,7 @@
         <form id="update" method="post" action="index.php" enctype="multipart/form-data">
             <input type="hidden" name="controller" value="admin" />
             <input type="hidden" name="action" value="update" />
+            <input type="hidden" name="id" value="<?=$accommodation->id?>" />
 
             <div class="fieldgroup">
                 <label>Name</label>
@@ -51,7 +52,8 @@
                     // $checked = ($this->oCategories->typeID == $type->id)? "checked" : "";
                 ?>
                 <div class="checkbox">
-                    <input type="checkbox" name="type[]" value="<?=$type->id?> <?=$checked?>"/>
+                <!-- <input type="checkbox" name="type[]" value="<?=$type->id?> <?=$checked?>"/> -->
+                    <input type="checkbox" name="type[]" value="<?=$type->id?>"/>
                     <span><?=$type->strName?></span>
                 </div><!-- .checkbox -->
                 <?php
@@ -64,13 +66,16 @@
                 <textarea name="strDescription" value="<?=$accommodation->strDescription?>"><?=$accommodation->strDescription?></textarea>
             </div><!-- .fieldgroup -->
 
-            <div class="fieldgroup">
+            <!-- <div class="fieldgroup">
                 <label>Image</label>
                 <img src="assets/<?=$accommodation->image?>" alt="<?=$accommodation->strName?>">
                 <input type="file" name="image1" value="<?=$accommodation->image?>" />
-            </div><!-- .fieldgroup -->
+            </div>.fieldgroup -->
 
-            <input class="cta" type="submit" value="Save">
+            <div class="action">
+                <input class="cta" type="submit" value="Save">
+                <a href="index.php?controller=admin&action=accommodationList" class="secondary-cta">Go back list</a>
+            </div>
         </form>
     </div><!-- .info -->
 
