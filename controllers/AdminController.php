@@ -189,42 +189,64 @@ Class AdminController extends Controller {
         if($_POST["strName"] && $_POST["city"] && $_POST["price"] && $_POST["maxGuestNumber"] && $_POST["type"] && $_POST["strDescription"])
 		{
 			// if there's a new image upload
-			if($FILES["image1"]) {
+			// if($FILES["image1"]) {
 
-				//reference: https://www.codeandcourse.com/how-to-upload-image-in-php-and-store-in-folder-and-database/
-				// file upload path
-				$targetDir = "assets/";
-				// create unique file name
-				$timestamp =round(microtime(true) * 1000);
-				$fileName = $timestamp.basename($_FILES['image']['name']);
-				$targetFilePath = $targetDir . $fileName;
+			// 	//reference: https://www.codeandcourse.com/how-to-upload-image-in-php-and-store-in-folder-and-database/
+			// 	// file upload path
+			// 	$targetDir = "assets/";
+			// 	// create unique file name
+			// 	$timestamp =round(microtime(true) * 1000);
+			// 	$fileName = $timestamp.basename($_FILES['image']['name']);
+			// 	$targetFilePath = $targetDir . $fileName;
 
-				// check the extension of the uploaded file
-				$fileType = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+			// 	// check the extension of the uploaded file
+			// 	$fileType = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
 				
-				//allowed file types
-				$allowTypes = array('png', 'jpg', 'jpeg');
+			// 	//allowed file types
+			// 	$allowTypes = array('png', 'jpg', 'jpeg');
 
-				if (!file_exists($targetFilePath)) 
-				{
-					if(in_array($fileType, $allowTypes))
-					{
-						// Upload file to server
-						if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)){
-							// step 1 :delete old pic
-							$sql = "DELETE FROM accommodationImages 
-							WHERE accommodationId = '".$_GET["aId"]."'";
-							mysqli_query(con(), $sql);
+			// 	if (!file_exists($targetFilePath)) 
+			// 	{
+			// 		if(in_array($fileType, $allowTypes))
+			// 		{
+			// 			// Upload file to server
+			// 			if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)){
+			// 				// step 1 :delete old pic
+			// 				$sql = "DELETE FROM accommodationImages 
+			// 				WHERE accommodationId = '".$_GET["aId"]."'";
+			// 				mysqli_query(con(), $sql);
 
-							// step 2 :insert new photo
-							$sql = "INSERT INTO accommodationImages (strFirstImage) 
-								VALUES ('".$_SESSION["userID"]."', '".$profilePhotoName."', '1')";
-							mysqli_query(con(), $sql);
-						}
-					}
-				}
-			}  
+			// 				// step 2 :insert new photo
+			// 				$sql = "INSERT INTO accommodationImages (strFirstImage) 
+			// 					VALUES ('".$_SESSION["userID"]."', '".$profilePhotoName."', '1')";
+			// 				mysqli_query(con(), $sql);
+			// 			}
+			// 		}
+			// 	}
+			// }  
 
+			$con = DB::connect();
+			// update info
+			$sql = "UPDATE accommodations 
+			SET strName='".$_POST["strName"]."', cityId='".$_POST["city"]."', strDescription='".$_POST["strDescription"]."', maxGuestNumber = '".$_POST["maxGuestNumber"]."', price = '".$_POST["price"]."'
+			WHERE id='".$_POST["id"]."'";
+			mysqli_query($con, $sql);
+
+			// delete all accommodation types
+			$sql = "DELETE FROM accommodationTypes 
+			WHERE accommodationId ='".$_POST["id"]."'";
+			mysqli_query($con, $sql);
+
+			// insert new type data
+			foreach($_POST["type"] as $type)
+			{
+				$sql = "INSERT INTO accommodationTypes (typeId, accommodationId)  
+				VALUES ('".$type."', '".$_POST["id"]."')";
+				mysqli_query($con, $sql);
+			}
+
+			// if successed go to accommodation list page
+			$this->go("admin", "accommodationList"); 
 
 		} else {
             // if unsucseful 
