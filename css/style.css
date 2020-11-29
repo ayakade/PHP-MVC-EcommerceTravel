@@ -906,6 +906,7 @@ nav {
 	.result .search .cta, .no-result .search .cta {
 		margin: 0;
 		width: auto;
+		margin-top: 23px;
 	}
 
 	/* types */
