@@ -90,7 +90,7 @@ Class Bookings {
     // user page: get their past bookings  
     public static function getPastBookings($userId)
     {
-        $bookings = DB::query("SSELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, cities.strName AS city, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
+        $bookings = DB::query("SELECT bookings.id, userId, CONCAT(users.strFirstName,  ' ' , users.strLastName) as name, accommodations.id AS accommodationId, accommodations.strName AS accommodation, cities.strName AS city, accommodationImages.strFirstImage AS image, checkin, checkout, totalStay, guestNumber, subtotal, discounts.strCode AS code, discounts.discountRate AS rate, discount, tax, total, paymentTypes.strName AS paymentType,  bookingProcessedDate, bookingStatus.strName AS status
         FROM bookings
         LEFT JOIN users ON bookings.userId = users.id
         LEFT JOIN paymentTypes ON bookings.paymentTypeId = paymentTypes.id
@@ -99,7 +99,8 @@ Class Bookings {
         LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         LEFT JOIN bookingStatus ON bookings.bookingStatusId = bookingStatus.id
-        WHERE userId ='".$userId."' AND bookingStatusId = 2"); 
+        WHERE userId ='".$userId."' AND bookingStatusId = 2
+        ORDER BY checkin DESC"); 
 
         // if there's no past bookings
         if($bookings == "") {
@@ -170,7 +171,8 @@ Class Bookings {
         LEFT JOIN accommodationImages ON accommodations.accommodationImageId = accommodationImages.id
         LEFT JOIN discounts ON bookings.discountId = discounts.id
         LEFT JOIN bookingStatus ON bookings.bookingStatusId = bookingStatus.id
-        WHERE bookingStatusId = 2"); 
+        WHERE bookingStatusId = 2
+        ORDER BY checkin DESC"); 
 
         // if there's no past bookings
         if($bookings == "") {
