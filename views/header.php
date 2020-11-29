@@ -7,22 +7,22 @@
         </div>
 
         <div id="flyoutMenu">
-        <?php
-            if(isset($_SESSION["userId"])) {
-                $arrMenu = array(
-                    array('menu'=>'My page', 'link'=>'index.php?controller=user&action=bookingList')
-                );
-            } else {
-                $arrMenu = array(
-                    array('menu'=>'Login', 'link'=>'index.php?controller=public&action=memberLogin')
-                );
-            }
-            foreach ($arrMenu as $key => $nav) {
-        ?>
+            <?php
+                if(isset($_SESSION["userId"])) {
+                    $arrMenu = array(
+                        array('menu'=>'My page', 'link'=>'index.php?controller=user&action=bookingList')
+                    );
+                } else {
+                    $arrMenu = array(
+                        array('menu'=>'Login', 'link'=>'index.php?controller=public&action=memberLogin')
+                    );
+                }
+                foreach ($arrMenu as $key => $nav) {
+            ?>
             <a href="<?=$nav["link"]?>"><?=$nav["menu"]?></a>
-        <?php
-            }
-        ?>
+            <?php
+                }
+            ?>
         </div><!-- #flyout menu -->
     </div><!-- .burger menu -->
 
@@ -31,14 +31,14 @@
     </div><!-- .logo -->
 
     <nav>
-    <?php
-        
-        foreach ($arrMenu as $key => $nav) {
-    ?>
+        <?php
+            
+            foreach ($arrMenu as $key => $nav) {
+        ?>
         <a href="<?=$nav["link"]?>"><?=$nav["menu"]?></a>
-    <?php
-        }
-    ?>
+        <?php
+            }
+        ?>
     </nav><!--  nav -->
 
 </div><!-- .header views/header.php -->
