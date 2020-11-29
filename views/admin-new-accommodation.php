@@ -73,13 +73,15 @@
                 </div><!-- .error pop up -->
             </div><!-- .fieldgroup -->
 
-            <div class="fieldgroup required">
-                <label>* Image</label>
-                <input type="file" name="image" value="" />
-                <div class="errorpopup">
-                    <p>This field is required</p>
-                </div><!-- .error pop up -->
-            </div><!-- .fieldgroup -->
+            <div class="images">
+                <div class="fieldgroup required">
+                    <label>* Image</label>
+                    <input type="file" name="image1" value="" />
+                    <div class="errorpopup">
+                        <p>This field is required</p>
+                    </div><!-- .error pop up -->
+                </div><!-- .fieldgroup -->
+            </div><!-- .images -->
 
             <input class="cta" type="submit" value="Save">
         </form>
