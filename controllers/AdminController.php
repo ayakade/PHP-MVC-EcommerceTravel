@@ -90,7 +90,7 @@ Class AdminController extends Controller {
 		$this->loadData(Accommodations::getAccommodation($_GET["aId"]), "oAccommodations");
 		$this->loadData(Cities::getAllCities(), "oCities");
 		$this->loadData(Types::getAllType(), "oTypes");
-		$this->loadData(Categories::getType($_GET["aId"]), "oCategories");
+		// $this->loadData(Categories::getType($_GET["aId"]), "oCategories");
         $this->loadView("views/admin-accommodation.php", 1, "contentHTML"); 
         $this->loadView("views/admin-layout.php", 1, "content"); // save the results of this view, into $this->content
 
@@ -116,18 +116,18 @@ Class AdminController extends Controller {
 	public function saveAccommodation()
 	{
 		// if all required field is filled
-        if($_POST["strName"] && $_POST["city"] && $_POST["price"] && $_POST["maxGuestNumber"] && $_POST["type"] && $_POST["strDescription"] && $_FILES["image"])
+        if($_POST["strName"] && $_POST["city"] && $_POST["price"] && $_POST["maxGuestNumber"] && $_POST["type"] && $_POST["strDescription"] && $_FILES["image1"])
 		{
             //reference: https://www.codeandcourse.com/how-to-upload-image-in-php-and-store-in-folder-and-database/
             // file upload path
             $targetDir = "assets/";
             // create unique file name
             $timestamp =round(microtime(true) * 1000);
-            $fileName = $timestamp.basename($_FILES['image']['name']);
-            $targetFilePath = $targetDir . $fileName;
+            $fileName1 = $timestamp.basename($_FILES['image1']['name']);
+            $targetFilePath = $targetDir . $fileName1;
 
             // check the extension of the uploaded file
-            $fileType = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+            $fileType = pathinfo($_FILES['image1']['name'], PATHINFO_EXTENSION);
             
             //allowed file types
             $allowTypes = array('png', 'jpg', 'jpeg');
@@ -137,7 +137,7 @@ Class AdminController extends Controller {
                 if(in_array($fileType, $allowTypes))
                 {
                     // Upload file to server
-                    if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath))
+                    if(move_uploaded_file($_FILES["image1"]["tmp_name"], $targetFilePath))
                     {
                         // insert to db
 						$con = DB::connect();
@@ -158,7 +158,7 @@ Class AdminController extends Controller {
 
 						// insert image data
 						$sql = "INSERT INTO accommodationImages (accommodationId, strFirstImage) 
-								VALUES ('".$lastID."', '".$fileName."')";
+								VALUES ('".$lastID."', '".$fileName1."')";
 						mysqli_query($con, $sql);
 						// after insert basic data get the new ID
 						$lastImageID = mysqli_insert_id($con);
@@ -184,61 +184,46 @@ Class AdminController extends Controller {
 	// update accommodation info
 	public function update() {
 		// if all required field is filled
-        if($_POST["strName"] && $_POST["city"] && $_POST["price"] && $_POST["maxGuestNumber"] && $_POST["type"] && $_POST["strDescription"] && $_FILES["image"])
+        if($_POST["strName"] && $_POST["city"] && $_POST["price"] && $_POST["maxGuestNumber"] && $_POST["type"] && $_POST["strDescription"])
 		{
-            //reference: https://www.codeandcourse.com/how-to-upload-image-in-php-and-store-in-folder-and-database/
-            // file upload path
-            $targetDir = "assets/";
-            // create unique file name
-            $timestamp =round(microtime(true) * 1000);
-            $fileName = $timestamp.basename($_FILES['image']['name']);
-            $targetFilePath = $targetDir . $fileName;
+			// if there's a new image upload
+			if($FILES["image1"]) {
 
-            // check the extension of the uploaded file
-            $fileType = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-            
-            //allowed file types
-            $allowTypes = array('png', 'jpg', 'jpeg');
+				//reference: https://www.codeandcourse.com/how-to-upload-image-in-php-and-store-in-folder-and-database/
+				// file upload path
+				$targetDir = "assets/";
+				// create unique file name
+				$timestamp =round(microtime(true) * 1000);
+				$fileName = $timestamp.basename($_FILES['image']['name']);
+				$targetFilePath = $targetDir . $fileName;
 
-            if (!file_exists($targetFilePath)) 
-            {
-                if(in_array($fileType, $allowTypes))
-                {
-                    // Upload file to server
-                    if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath))
-                    {
-						$con = DB::connect();
-						// update basic data
-                        $sql = "UPDATE accommodations 
-								SET strName = '".$_POST["strName"]."', cityId = '".$_POST["city"]."', strDescription = '".$_POST["strDescription"]."', maxGuestNumber = '".$_POST["maxGuestNumber"]."', price = '".$_POST["price"]."'
-								WHERE id = ) ";
-						mysqli_query($con, $sql);
+				// check the extension of the uploaded file
+				$fileType = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+				
+				//allowed file types
+				$allowTypes = array('png', 'jpg', 'jpeg');
 
-						// update type data
-						foreach($_POST["type"] as $type)
-						{
-							$sql = "INSERT INTO accommodationTypes (typeId, accommodationId)  
-							VALUES ('".$type."', '".$lastID."')";
-							mysqli_query($con, $sql);
+				if (!file_exists($targetFilePath)) 
+				{
+					if(in_array($fileType, $allowTypes))
+					{
+						// Upload file to server
+						if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)){
+							// step 1 :delete old pic
+							$sql = "DELETE FROM accommodationImages 
+							WHERE accommodationId = '".$_GET["aId"]."'";
+							mysqli_query(con(), $sql);
+
+							// step 2 :insert new photo
+							$sql = "INSERT INTO accommodationImages (strFirstImage) 
+								VALUES ('".$_SESSION["userID"]."', '".$profilePhotoName."', '1')";
+							mysqli_query(con(), $sql);
 						}
-
-						// update image data
-						$sql = "INSERT INTO accommodationImages (accommodationId, strFirstImage) 
-								VALUES ('".$lastID."', '".$fileName."')";
-						mysqli_query($con, $sql);
+					}
+				}
+			}  
 
 
-						// add accommocationImageId to table accommodations
-						$sql = "UPDATE accommodations
-								SET accommodationImageId = '".$lastImageID."'
-								WHERE id = '".$lastID."'";
-						mysqli_query($con, $sql);
-
-                        // if successed go to accommodation list page
-                        $this->go("admin", "accommodationList"); 
-                    }
-                }
-            }  
 		} else {
             // if unsucseful 
             echo "unsucseful";
