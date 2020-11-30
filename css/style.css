@@ -918,11 +918,15 @@ nav {
 	/* accommodation-reccomend */
 
 	.accommodation-recommend {
-		width: 1300px;
+		width: 1200px;
 	}
 
 	.accommodation-recommend .accommodationList {
 		display: flex;
+	}
+
+	.accommodation-recommend .accommodationList .accommodation {
+		width: 400px;
 	}
 
 	/* accommodation */
