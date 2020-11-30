@@ -10,11 +10,11 @@ Class Searches {
         FROM bookings
         LEFT JOIN accommodations ON accommodations.id = bookings.accommodationId 
         LEFT JOIN cities ON cities.id = accommodations.cityId
-        WHERE ((checkin >= '".$checkin."' AND checkout <= '".$checkout."') OR (checkin >= '".$checkin."' AND checkout <=  '".$checkout."')) AND cities.strName = '".$location."' AND maxGuestNumber >= '".$guest."'");
+        WHERE ((checkin <= '".$checkin."' AND checkout >= '".$checkin."') OR (checkin <= '".$checkout."' AND checkout >= '".$checkout."')) AND cities.strName = '".$location."' AND maxGuestNumber >= '".$guest."'");
 
         // if there's no match, available
         if($available =="") {
             return true;
-        }
+        } 
     }
 }
