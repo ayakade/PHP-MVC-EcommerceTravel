@@ -16,9 +16,9 @@ foreach ($this->oBookings as $booking)
             <select name="rates">
                 <option value="1">1 (Bad)</option>
                 <option value="2">2 (Not good)</option>
-                <option value="3">3 (okay)</option>
-                <option value="4">4 (good)</option>
-                <option value="5">5 (great)</option>
+                <option value="3">3 (Okay)</option>
+                <option value="4">4 (Good)</option>
+                <option value="5">5 (Great)</option>
             </select>
         </div><!-- .fieldgroup -->
 
